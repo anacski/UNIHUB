@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>UNIHUB - Chat</title>
+    <link rel="stylesheet" href="style-chat.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <img src="logo.png" class="nav-logo" alt="Logo">
+                <span class="nav-title">UNIHUB</span>
+            </div>
+            <input type="text" class="search-bar" placeholder="Buscar futsal, vôlei...">
+            <div class="nav-right">
+                <div class="notif-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <a href="#">Início</a>
+                <a href="#">Criar Evento</a>
+                <a href="#">Perfil</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="chat-container">
+        <aside class="sidebar-chats">
+            <div class="chat-list">
+                <div class="chat-item">
+                    <img src="icon-xadrez.png" class="chat-avatar" alt="Xadrezin">
+                    <div class="chat-info">
+                        <h4>Xadrezin</h4>
+                        <p>sábado não tem...</p>
+                    </div>
+                    <span class="chat-time">15:17</span>
+                </div>
+
+                <div class="chat-item active">
+                    <img src="icon-basquete.png" class="chat-avatar" alt="Basquete">
+                    <div class="chat-info">
+                        <h4>Basquete</h4>
+                        <p>📎 Vídeo</p>
+                    </div>
+                    <span class="chat-time">12:03</span>
+                </div>
+
+                <div class="chat-item">
+                    <img src="icon-volei.png" class="chat-avatar" alt="Vôlei">
+                    <div class="chat-info">
+                        <h4>Vôlei sexta-feira 10/04</h4>
+                        <p>boaaa!!!</p>
+                    </div>
+                    <span class="chat-time">10:33</span>
+                </div>
+
+                <div class="chat-item">
+                    <img src="icon-pingpong.png" class="chat-avatar" alt="Ping pong">
+                    <div class="chat-info">
+                        <h4>Ping pong do CALOVE</h4>
+                        <p>KKKKKKKKK</p>
+                    </div>
+                    <span class="chat-time">21:40</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn-voltar">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Voltar
+                </button>
+            </div>
+        </aside>
+
+        <section class="main-chat">
+            <header class="chat-header">
+                <div class="chat-header-info">
+                    <img src="icon-basquete.png" class="chat-avatar" alt="Basquete">
+                    <h2>Basquete</h2>
+                </div>
+                <button class="btn-options">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="12" cy="5" r="1"></circle>
+                        <circle cx="12" cy="19" r="1"></circle>
+                    </svg>
+                </button>
+            </header>
+
+            <div class="chat-messages">
+                <div class="message right">
+                    <div class="bubble blue">Vai ter jogo sábado?</div>
+                </div>
+
+                <div class="timestamp">12h</div>
+
+                <div class="message left">
+                    <div class="bubble yellow">15h no aterro</div>
+                </div>
+
+                <div class="message right">
+                    <div class="bubble blue thumb">👍</div>
+                </div>
+
+                <div class="timestamp">11h</div>
+
+                <div class="message left">
+                    <div class="bubble yellow">
+                        <img src="jogo-basquete.jpeg" class="media-preview" alt="Print de jogo de basquete normal">
+                    </div>
+                </div>
+            </div>
+
+            <footer class="chat-input-area">
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Digite uma mensagem...">
+                    <button class="btn-attach">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button class="btn-send">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </footer>
+        </section>
+    </main>
+</body>
+</html>

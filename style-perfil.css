@@ -1,0 +1,363 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+}
+
+.navbar {
+    background-color: #0d47a1;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    width: 60px;
+    height: auto;
+}
+
+.nav-title {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.search-bar {
+    width: 400px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.notif-icon {
+    position: relative;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+}
+
+.notif-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+.profile-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.profile-card {
+    background-color: #dce5d8;
+    border-radius: 10px;
+    border: 1px solid #a9b9b0;
+    position: relative;
+}
+
+.profile-header {
+    background-color: #4b6355;
+    height: 100px;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+}
+
+.btn-edit-profile {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profile-body {
+    text-align: center;
+    padding-bottom: 25px;
+    position: relative;
+}
+
+.avatar-wrapper {
+    margin-top: -50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid white;
+    object-fit: cover;
+    background-color: #ccc;
+}
+
+.profile-body h2 {
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.profile-body .course {
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 3px;
+}
+
+.profile-body .age {
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.profile-body .bio {
+    font-size: 14px;
+    color: #111;
+}
+
+.side-badges {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.badge-icon {
+    font-size: 24px;
+    background: #fff;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tabs-container {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #000;
+    margin: 30px 0 20px 0;
+}
+
+.tab {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #222;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+}
+
+.tab.active {
+    border-bottom: 4px solid #1976d2;
+}
+
+.events-list, .achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.event-card {
+    background-color: #7ba0d4;
+    border-radius: 8px;
+    display: flex;
+    padding: 15px;
+    color: black;
+}
+
+.event-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+}
+
+.calendar-svg {
+    width: 60px;
+    height: 60px;
+    stroke-width: 2.5;
+}
+
+.success-box {
+    background-color: #00ff5d;
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-box svg {
+    width: 50px;
+    height: 50px;
+}
+
+.edit-pill {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 12px;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+}
+
+.event-middle {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.event-middle h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.desc-label {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.desc-text {
+    font-size: 13px;
+    color: #333;
+}
+
+.event-right {
+    min-width: 150px;
+    border-left: 2px solid #333;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-label {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.info-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+    line-height: 1.1;
+}
+
+.info-value-small {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.achievement-card {
+    background-color: #7ba0d4;
+    border-radius: 8px;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+}
+
+.achievement-left {
+    min-width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.badge-circle.purple {
+    background-color: #3b2a5c;
+}
+
+.badge-circle.red {
+    background-color: #e57373;
+}
+
+.achievement-right {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.achievement-right h3 {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 5px;
+}

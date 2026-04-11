@@ -1,0 +1,148 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body, html {
+    height: 100%;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.lado-azul {
+    width: 50%;
+    background-color: #0d47a1;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.lado-branco {
+    width: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.conteudo-central {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-img {
+    width: 450px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.lado-azul p {
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 400px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.caixa-laranja, .caixa-cadastro {
+    background-color: #fbb034;
+    padding: 50px 40px;
+    border-radius: 35px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.caixa-laranja h2, .caixa-cadastro h2 {
+    color: #1a237e;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+input, button {
+    width: 100%;
+    padding: 18px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+input {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn-azul {
+    background-color: #64b5f6;
+    color: #1a237e;
+    transition: background 0.3s;
+}
+
+.btn-azul:hover {
+    background-color: #4dabf5;
+}
+
+.esqueceu {
+    color: white;
+    font-size: 14px;
+    margin: 5px 0 20px 0;
+    cursor: pointer;
+}
+
+.divisor {
+    margin: 20px 0;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.divisor::before, .divisor::after {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid #1a237e;
+    margin: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+.mensagem-erro {
+    color: #ff0000;
+    font-size: 13px;
+    margin-top: -5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}

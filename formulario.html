@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>UNIHUB - Criar Evento</title>
+    <link rel="stylesheet" href="style-formulario.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <img src="logo.png" class="nav-logo" alt="Logo">
+                <span class="nav-title">UNIHUB</span>
+            </div>
+            <input type="text" class="search-bar" placeholder="Buscar futsal, vôlei...">
+            <div class="nav-right">
+                <div class="notif-icon">💬<span class="badge">3</span></div>
+                <a href="#">Início</a>
+                <a href="#">Criar Evento</a>
+                <a href="#">Perfil</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="form-container">
+        <div class="form-card">
+            <h2>Organizar Atividade</h2>
+            <form>
+                <div class="form-group">
+                    <label>Nome do Evento:</label>
+                    <input type="text" placeholder="Esporte/Atividade">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Local:</label>
+                        <div class="input-icon">
+                            <input type="text" placeholder="Auditório CLA">
+                            <span>📍</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Data e Hora:</label>
+                        <div class="input-icon">
+                            <input type="text" placeholder="dd/mm    00:00">
+                            <span>📅</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <textarea placeholder="Digite aqui..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">ⓧ Cancelar</button>
+                    <button type="submit" class="btn-submit">Publicar no Mural</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

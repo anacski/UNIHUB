@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>UNIHUB - Editar Perfil</title>
+    <link rel="stylesheet" href="style-editar-perfil.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <img src="logo.png" class="nav-logo" alt="Logo">
+                <span class="nav-title">UNIHUB</span>
+            </div>
+            <input type="text" class="search-bar" placeholder="Buscar futsal, vôlei...">
+            <div class="nav-right">
+                <div class="notif-icon">💬<span class="badge">3</span></div>
+                <a href="#">Início</a>
+                <a href="#">Criar Evento</a>
+                <a href="#">Perfil</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="edit-container">
+        <div class="edit-card">
+            <div class="edit-header">
+                <svg class="header-camera" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+            </div>
+            
+            <div class="avatar-section">
+                <div class="avatar-wrapper">
+                    <img src="avatar-jorge.png" class="avatar-img" alt="Avatar">
+                    <div class="avatar-camera">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <form class="edit-form">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" value="Jorge Filho">
+                </div>
+
+                <div class="form-group">
+                    <label>Campus</label>
+                    <div class="custom-select">
+                        <select>
+                            <option>CCH</option>
+                            <option>CCET</option>
+                            <option>CLA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Curso</label>
+                    <div class="custom-select">
+                        <select>
+                            <option>Pedagogia</option>
+                            <option>Sistemas de Informação</option>
+                            <option>Teatro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Biografia</label>
+                    <textarea placeholder="Digite aqui..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
