@@ -1,2 +1,1 @@
 # UNIHUB
-Nosso projeto integrador
