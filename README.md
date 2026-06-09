@@ -27,5 +27,5 @@ O front-end da aplicação foi construído de forma nativa para garantir desempe
 
 ---
 
-## Desenvolvedor(es)
+## Desenvolvedores
 * [Ana Carolina Barbosa & Davi Pettersen] - [Sistemas de Informaçao - UNIRIO]
