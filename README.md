@@ -1,5 +1,5 @@
 # UniHub - Projeto Integrador
-
+---
 ### Descrição
 O **UniHub** é uma plataforma web desenvolvida como Projeto Integrador universitário, projetada para centralizar, facilitar e otimizar a busca e a organização de atividades acadêmicas por parte dos estudantes. 
 
