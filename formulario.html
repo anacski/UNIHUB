@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>UNIHUB - Criar Evento</title>
-    <link rel="stylesheet" href="style-formulario.css">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style-formulario.css"> </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
-                <img src="logo.png" class="nav-logo" alt="Logo">
-                <span class="nav-title">UNIHUB</span>
+                <a href="timeline.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+                    <img src="images/logo.png" class="nav-logo" alt="Logo">
+                    <span class="nav-title">UNIHUB</span>
+                </a>
             </div>
-            <input type="text" class="search-bar" placeholder="Buscar futsal, vôlei...">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Buscar futsal, vôlei...">
             <div class="nav-right">
-                <div class="notif-icon">💬<span class="badge">3</span></div>
-                <a href="#">Início</a>
-                <a href="#">Criar Evento</a>
-                <a href="#">Perfil</a>
+                <a href="chat.html" class="nav-item-link" title="Mensagens">
+                    <div class="notif-icon"><i class="fa-regular fa-comment-dots"></i><span class="badge">3</span></div>
+                </a>
+                <a href="timeline.html">Início</a>
+                <a href="formulario.html" class="active">Criar Evento</a>
+                <a href="perfil.html">Perfil</a>
+                <a href="#" id="btn-sair" class="logout-link" title="Sair" style="color: #ff3333; font-size: 1.2rem; margin-left: 15px; display: flex; align-items: center; background: none; border: none; cursor: pointer;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -25,40 +32,44 @@
     <main class="form-container">
         <div class="form-card">
             <h2>Organizar Atividade</h2>
-            <form>
+            <form id="event-form">
                 <div class="form-group">
                     <label>Nome do Evento:</label>
-                    <input type="text" placeholder="Esporte/Atividade">
+                    <input type="text" placeholder="Esporte/Atividade" required>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Local:</label>
                         <div class="input-icon">
-                            <input type="text" placeholder="Auditório CLA">
-                            <span>📍</span>
+                            <input type="text" placeholder="Auditório CLA" required>
+                            <span class="field-icon" style="background: none; border: none;"><i class="fa-solid fa-location-dot"></i></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Data e Hora:</label>
                         <div class="input-icon">
-                            <input type="text" placeholder="dd/mm    00:00">
-                            <span>📅</span>
+                            <input type="datetime-local" required>
+                            <span class="field-icon" style="background: none; border: none;"><i class="fa-regular fa-calendar-days"></i></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Descrição:</label>
-                    <textarea placeholder="Digite aqui..."></textarea>
+                    <textarea placeholder="Digite aqui..." required></textarea>
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" class="btn-cancel">ⓧ Cancelar</button>
+                    <button type="button" class="btn-cancel" onclick="window.location.href='timeline.html'" style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <i class="fa-regular fa-circle-xmark"></i> Cancelar
+                    </button>
                     <button type="submit" class="btn-submit">Publicar no Mural</button>
                 </div>
             </form>
         </div>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

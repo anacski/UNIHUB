@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>UNIHUB - Conquistas</title>
-    <link rel="stylesheet" href="style-perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style-perfil.css"> 
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
-                <img src="logo.png" class="nav-logo" alt="Logo">
-                <span class="nav-title">UNIHUB</span>
+                <a href="timeline.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+                    <img src="images/logo.png" class="nav-logo" alt="Logo">
+                    <span class="nav-title">UNIHUB</span>
+                </a>
             </div>
-            <input type="text" class="search-bar" placeholder="Buscar futsal, vôlei...">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Buscar futsal, vôlei...">
             <div class="nav-right">
-                <div class="notif-icon">💬<span class="badge">3</span></div>
-                <a href="#">Início</a>
-                <a href="#">Criar Evento</a>
-                <a href="#">Perfil</a>
+                <a href="chat.html" class="nav-item-link" title="Mensagens">
+                    <div class="notif-icon"><i class="fa-regular fa-comment-dots"></i><span class="badge">3</span></div>
+                </a>
+                <a href="timeline.html">Início</a>
+                <a href="formulario.html">Criar Evento</a>
+                <a href="perfil.html" class="active">Perfil</a>
+                <a href="#" id="btn-sair" class="logout-link" title="Sair" style="color: #ff3333; font-size: 1.2rem; margin-left: 15px; display: flex; align-items: center; background: none; border: none; cursor: pointer;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -25,11 +33,13 @@
     <main class="profile-container">
         <section class="profile-card">
             <div class="profile-header">
-                <button class="btn-edit-profile">Editar Perfil</button>
+                <a href="editar-perfil.html">
+                    <button class="btn-edit-profile"><i class="fa-regular fa-user-gear"></i> Editar Perfil</button>
+                </a>
             </div>
             <div class="profile-body">
                 <div class="avatar-wrapper">
-                    <img src="avatar-jorge.png" class="avatar-large" alt="Jorge Filho">
+                    <img src="images/avatar-jorge.png" class="avatar-large" alt="Jorge Filho">
                 </div>
                 <h2>Jorge Filho</h2>
                 <p class="course">CCH - Pedagogia</p>
@@ -37,23 +47,24 @@
                 <p class="bio">Gosto de esportes calmos</p>
                 
                 <div class="side-badges">
-                    <span class="badge-icon">🏆</span>
-                    <span class="badge-icon">🥇</span>
+                    <span class="badge-icon" title="Campeão">🏆</span>
+                    <span class="badge-icon" title="Primeiro Lugar">🥇</span>
                 </div>
             </div>
         </section>
 
         <section class="tabs-container">
-            <a href="perfil.html" class="tab">Eventos Salvos</a>
-            <a href="atividades.html" class="tab">Atividade Antigas</a>
-            <div class="tab active">Conquistas</div>
+            <a href="perfil.html" class="tab" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i> Eventos Salvos</a>
+            <a href="atividades.html" class="tab" style="text-decoration: none;"><i class="fa-solid fa-clock-rotate-left"></i> Atividade Antigas</a>
+            <div class="tab active"><i class="fa-solid fa-trophy"></i> Conquistas</div>
         </section>
 
         <section class="achievements-list">
+            
             <div class="achievement-card">
                 <div class="achievement-left">
-                    <div class="badge-circle purple">
-                        🏆
+                    <div class="badge-circle purple" style="display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-trophy" style="font-size: 1.5rem; color: #fff;"></i>
                     </div>
                 </div>
                 <div class="achievement-right">
@@ -65,8 +76,8 @@
 
             <div class="achievement-card">
                 <div class="achievement-left">
-                    <div class="badge-circle red">
-                        🥇
+                    <div class="badge-circle red" style="display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-medal" style="font-size: 1.5rem; color: #fff;"></i>
                     </div>
                 </div>
                 <div class="achievement-right">
@@ -75,7 +86,10 @@
                     <p class="desc-text">Tenha a conta ativa por um ano ou mais para ganhar essa conquista.</p>
                 </div>
             </div>
+            
         </section>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -307,3 +307,66 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+const abasPerfil = document.querySelectorAll('.tab');
+if (abasPerfil.length > 0) {
+    abasPerfil.forEach(aba => {
+        aba.style.cursor = "pointer";
+        aba.addEventListener('click', function() {
+            abasPerfil.forEach(a => a.classList.remove('active'));
+            this.classList.add('active');
+            
+            const tipoAba = this.getAttribute('data-tab');
+            console.log(`Usuário mudou para a aba: ${tipoAba}`);
+        });
+    });
+}
+
+const formEvento = document.getElementById('event-form');
+if (formEvento) {
+    formEvento.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        alert("Sucesso! Sua atividade foi publicada e já está disponível no mural da timeline.");
+        window.location.href = "timeline.html"; 
+    });
+}
+
+const formEditarPerfil = document.getElementById('edit-profile-form');
+if (formEditarPerfil) {
+    formEditarPerfil.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        alert("Alterações salvas com sucesso!");
+        window.location.href = "perfil.html"; 
+    });
+}
+
+const btnEnviarMsg = document.getElementById('btn-send-message');
+const inputMsg = document.getElementById('chat-input-field');
+const containerMsgs = document.getElementById('chat-messages-container');
+
+if (btnEnviarMsg && inputMsg && containerMsgs) {
+    function enviarMensagem() {
+        const texto = inputMsg.value.trim();
+        if (texto === "") return;
+
+        const divMensagem = document.createElement('div');
+        divMensagem.className = 'message right';
+        divMensagem.innerHTML = `<div class="bubble blue">${texto}</div>`;
+        
+        containerMsgs.appendChild(divMensagem);
+        inputMsg.value = "";
+        
+        containerMsgs.scrollTop = containerMsgs.scrollHeight;
+    }
+
+    btnEnviarMsg.addEventListener('click', enviarMensagem);
+
+    inputMsg.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            enviarMensagem();
+        }
+    });
+}
+
