@@ -103,10 +103,8 @@ if (btnCriarConta) {
     });
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
 
-    
     const btnSair = document.getElementById('btn-sair');
     if (btnSair) {
         btnSair.addEventListener('click', function(e) {
@@ -117,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    
     const cardPerfilAtalho = document.getElementById('card-perfil-atalho');
     if (cardPerfilAtalho) {
         cardPerfilAtalho.addEventListener('click', () => window.location.href = "perfil.html");
@@ -130,11 +127,83 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    const inputNovoPost = document.getElementById('input-novo-post');
+    const botoesAcao = document.querySelectorAll('.action-btn');
     
+    const hiddenPhotoInput = document.getElementById('hidden-photo-input');
+    const hiddenVideoInput = document.getElementById('hidden-video-input');
+    const hiddenDateInput = document.getElementById('hidden-date-input');
+
+    botoesAcao.forEach(botao => {
+        botao.style.cursor = "pointer";
+        botao.addEventListener('click', function() {
+            const textoBotao = this.textContent.trim();
+
+            if (textoBotao.includes("Foto") && hiddenPhotoInput) {
+                hiddenPhotoInput.click();
+            } 
+            else if (textoBotao.includes("Vídeo") && hiddenVideoInput) {
+                hiddenVideoInput.click();
+            } 
+            else if (textoBotao.includes("Data") && hiddenDateInput) {
+                hiddenDateInput.showPicker();
+            } 
+            else if (textoBotao.includes("Câmera")) {
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(function(stream) {
+                            alert("Permissão concedida! Câmera conectada com sucesso.");
+                            stream.getTracks().forEach(track => track.stop());
+                        })
+                        .catch(function(error) {
+                            alert("Acesso à câmera negado ou dispositivo de captura não encontrado.");
+                            console.error("Erro na câmera:", error);
+                        });
+                } else {
+                    alert("Seu navegador atual não suporta acesso direto à câmera.");
+                }
+            }
+        });
+    });
+
+    if (hiddenPhotoInput) {
+        hiddenPhotoInput.addEventListener('change', function() {
+            if (this.files.length > 0 && inputNovoPost) {
+                inputNovoPost.value += ` [Imagem selecionada: ${this.files[0].name}]`;
+            }
+        });
+    }
+
+    if (hiddenVideoInput) {
+        hiddenVideoInput.addEventListener('change', function() {
+            if (this.files.length > 0 && inputNovoPost) {
+                inputNovoPost.value += ` [Vídeo selecionado: ${this.files[0].name}]`;
+            }
+        });
+    }
+
+    if (hiddenDateInput) {
+        hiddenDateInput.addEventListener('change', function() {
+            if (this.value && inputNovoPost) {
+                const dataFormatada = this.value.split('-').reverse().join('/');
+                inputNovoPost.value += ` [Evento: ${dataFormatada}]`;
+            }
+        });
+    }
+
     function adicionarInteratividadeAoPost(postCard) {
         const btnCurtir = postCard.querySelector('.btn-curtir');
         const btnSalvar = postCard.querySelector('.btn-salvar');
         const inputComentario = postCard.querySelector('.input-comentario');
+
+        postCard.querySelectorAll('.interactive-icon, .icon-btn-share').forEach(btn => {
+            btn.style.background = "none";
+            btn.style.border = "none";
+            btn.style.padding = "5px";
+            btn.style.cursor = "pointer";
+            btn.style.outline = "none";
+            btn.style.boxShadow = "none";
+        });
 
         if (btnCurtir) {
             btnCurtir.addEventListener('click', function() {
@@ -143,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 if (this.classList.contains('ativo')) {
                     icone.className = "fa-solid fa-heart"; 
-                    this.style.color = "#ff3333";         
+                    this.style.color = "#ff3333";      
                 } else {
                     icone.className = "fa-regular fa-heart"; 
                     this.style.color = "";
@@ -158,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 if (this.classList.contains('ativo')) {
                     icone.className = "fa-solid fa-bookmark"; 
-                    this.style.color = "#ffcc00";           
+                    this.style.color = "#ffcc00";            
                 } else {
                     icone.className = "fa-regular fa-bookmark"; 
                     this.style.color = "";
@@ -167,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         if (inputComentario) {
-            
             inputComentario.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' && this.value.trim() !== "") {
                     alert(`Comentário enviado: "${this.value}"`);
@@ -177,8 +245,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    
-    const inputNovoPost = document.getElementById('input-novo-post');
     const feedContainer = document.getElementById('feed-container');
 
     if (inputNovoPost && feedContainer) {
@@ -198,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <h4 class="nome-perfil-clicavel">Jorge Filho</h4>
                                 <span>Postou uma nova atividade • Agora mesmo</span>
                             </div>
-                            <button class="icon-btn-share"><i class="fa-solid fa-share-nodes"></i></button>
+                            <button class="icon-btn-share" title="Compartilhar"><i class="fa-solid fa-share-nodes"></i></button>
                         </div>
                         <div class="post-content">
                             ${conteudoDoPost}

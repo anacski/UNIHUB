@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>UNIHUB - Timeline</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style-timeline.css">
 </head>
@@ -10,7 +11,7 @@
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
-            
+                
                 <a href="timeline.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
                     <img src="images/logo.png" class="nav-logo" alt="Logo">
                     <span class="nav-title">UNIHUB</span>
@@ -18,7 +19,7 @@
             </div>
             <input type="text" id="search-bar" class="search-bar" placeholder="Buscar futsal, vôlei...">
             <div class="nav-right">
-              
+                
                 <a href="chat.html" class="nav-item-link" title="Mensagens">
                     <div class="notif-icon"><i class="fa-regular fa-comment-dots"></i><span class="badge">3</span></div>
                 </a>
@@ -54,7 +55,6 @@
                 </div>
             </div>
         </aside>
-
         
         <section class="feed">
             <div class="create-post">
@@ -68,9 +68,12 @@
                     <button class="action-btn"><i class="fa-solid fa-video"></i> Vídeo</button>
                     <button class="action-btn"><i class="fa-regular fa-calendar-days"></i> Data</button>
                 </div>
+                
+                <input type="file" id="hidden-photo-input" accept="image/*" style="display: none;">
+                <input type="file" id="hidden-video-input" accept="video/*" style="display: none;">
+                <input type="date" id="hidden-date-input" style="display: none;">
             </div>
 
-            
             <div id="feed-container">
                 
                 <div class="post-card">
@@ -93,7 +96,6 @@
                     </div>
                 </div>
 
-                
                 <div class="post-card">
                     <div class="post-header">
                         <img src="images/avatar-maria.png" class="avatar-small" alt="Maria Alice">
@@ -120,7 +122,6 @@
             </div>
         </section>
 
-        
         <aside class="sidebar-right">
             <div class="trending-card">
                 <h3>Em alta na UNIRIO</h3>
@@ -138,7 +139,6 @@
         </aside>
     </main>
 
-    
     <script src="script.js"></script>
 </body>
 </html>
