@@ -104,130 +104,140 @@ if (btnCriarConta) {
 }
 
 
-const btnSair = document.getElementById('btn-sair');
-if (btnSair) {
-    btnSair.addEventListener('click', function(e) {
-        e.preventDefault();
-        const confirmaSair = confirm("Você tem certeza que deseja sair?");
-        if (confirmaSair) {
-            window.location.href = "index.html";
-        }
-    });
-}
+document.addEventListener("DOMContentLoaded", function() {
 
-
-const cardPerfilAtalho = document.getElementById('card-perfil-atalho');
-const elementosPerfilClicaveis = document.querySelectorAll('.avatar-clicavel, .nome-perfil-clicavel');
-
-if (cardPerfilAtalho) {
-    cardPerfilAtalho.addEventListener('click', function() {
-        window.location.href = "perfil.html";
-    });
-}
-
-elementosPerfilClicaveis.forEach(elemento => {
-    elemento.addEventListener('click', function() {
-        window.location.href = "perfil.html";
-    });
-});
-
-
-function adicionarInteratividadeAoPost(postCard) {
-    const btnCurtir = postCard.querySelector('.btn-curtir');
-    const btnSalvar = postCard.querySelector('.btn-salvar');
-    const inputComentario = postCard.querySelector('.input-comentario');
-
-    if (btnCurtir) {
-        btnCurtir.addEventListener('click', function() {
-            this.classList.toggle('ativo');
-            if (this.classList.contains('ativo')) {
-                this.style.transform = "scale(1.25)";
-                this.style.filter = "drop-shadow(0px 0px 4px rgba(255, 0, 0, 0.6))";
-            } else {
-                this.style.transform = "scale(1)";
-                this.style.filter = "";
+    
+    const btnSair = document.getElementById('btn-sair');
+    if (btnSair) {
+        btnSair.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm("Você tem certeza que deseja sair do UniHub?")) {
+                window.location.href = "index.html";
             }
         });
     }
 
-    if (btnSalvar) {
-        btnSalvar.addEventListener('click', function() {
-            this.classList.toggle('ativo');
-            this.style.transform = this.classList.contains('ativo') ? "scale(1.2)" : "scale(1)";
+    
+    const cardPerfilAtalho = document.getElementById('card-perfil-atalho');
+    if (cardPerfilAtalho) {
+        cardPerfilAtalho.addEventListener('click', () => window.location.href = "perfil.html");
+    }
+
+    function aplicarCliquesDePerfil(container) {
+        container.querySelectorAll('.avatar-clicavel, .nome-perfil-clicavel').forEach(elemento => {
+            elemento.style.cursor = "pointer";
+            elemento.addEventListener('click', () => window.location.href = "perfil.html");
         });
     }
 
-    if (inputComentario) {
-        inputComentario.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && this.value.trim() !== "") {
-                alert(`Comentário enviado com sucesso: "${this.value}"`);
-                this.value = "";
-            }
-        });
-    }
-}
+    
+    function adicionarInteratividadeAoPost(postCard) {
+        const btnCurtir = postCard.querySelector('.btn-curtir');
+        const btnSalvar = postCard.querySelector('.btn-salvar');
+        const inputComentario = postCard.querySelector('.input-comentario');
 
-
-const inputNovoPost = document.getElementById('input-novo-post');
-const feedContainer = document.getElementById('feed-container');
-
-if (inputNovoPost && feedContainer) {
-    inputNovoPost.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && inputNovoPost.value.trim() !== "") {
-            const conteudoDoPost = inputNovoPost.value;
-
-            const novoPost = document.createElement('div');
-            novoPost.className = 'post-card';
-            novoPost.innerHTML = `
-                <div class="post-header">
-                    <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Jorge Filho" style="cursor: pointer;">
-                    <div class="post-info">
-                        <h4 class="nome-perfil-clicavel" style="cursor: pointer;">Jorge Filho</h4>
-                        <span>Postou uma nova atividade • Agora mesmo</span>
-                    </div>
-                    <button class="icon-btn-share">🔗</button>
-                </div>
-                <div class="post-content">
-                    ${conteudoDoPost}
-                </div>
-                <div class="post-footer">
-                    <button class="interactive-icon btn-responder" title="Responder">↩️</button>
-                    <button class="interactive-icon btn-curtir" title="Curtir">❤️</button>
-                    <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter">
-                    <button class="interactive-icon btn-salvar" title="Salvar">🔖</button>
-                </div>
-            `;
-
-            
-            feedContainer.insertBefore(novoPost, feedContainer.firstChild);
-            inputNovoPost.value = "";
-
-            
-            adicionarInteratividadeAoPost(novoPost);
-
-            
-            novoPost.querySelectorAll('.avatar-clicavel, .nome-perfil-clicavel').forEach(el => {
-                el.addEventListener('click', () => window.location.href = "perfil.html");
+        if (btnCurtir) {
+            btnCurtir.addEventListener('click', function() {
+                const icone = this.querySelector('i');
+                this.classList.toggle('ativo');
+                
+                if (this.classList.contains('ativo')) {
+                    icone.className = "fa-solid fa-heart"; 
+                    this.style.color = "#ff3333";         
+                } else {
+                    icone.className = "fa-regular fa-heart"; 
+                    this.style.color = "";
+                }
             });
         }
-    });
-}
 
-
-document.querySelectorAll('.post-card').forEach(post => adicionarInteratividadeAoPost(post));
-
-
-const btnConfirmar = document.getElementById('btn-confirmar-presenca');
-if (btnConfirmar) {
-    btnConfirmar.addEventListener('click', function() {
-        if (this.textContent === "Confirmar presença") {
-            this.textContent = "✓ Presença Confirmada!";
-            this.style.backgroundColor = "#28a745";
-            this.style.color = "#fff";
-        } else {
-            this.textContent = "Confirmar presença";
-            this.style.backgroundColor = "";
-            this.style.color = "";
+        if (btnSalvar) {
+            btnSalvar.addEventListener('click', function() {
+                const icone = this.querySelector('i');
+                this.classList.toggle('ativo');
+                
+                if (this.classList.contains('ativo')) {
+                    icone.className = "fa-solid fa-bookmark"; 
+                    this.style.color = "#ffcc00";           
+                } else {
+                    icone.className = "fa-regular fa-bookmark"; 
+                    this.style.color = "";
+                }
+            });
         }
+
+        if (inputComentario) {
+            
+            inputComentario.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && this.value.trim() !== "") {
+                    alert(`Comentário enviado: "${this.value}"`);
+                    this.value = "";
+                }
+            });
+        }
+    }
+
+    
+    const inputNovoPost = document.getElementById('input-novo-post');
+    const feedContainer = document.getElementById('feed-container');
+
+    if (inputNovoPost && feedContainer) {
+        inputNovoPost.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); 
+                
+                if (inputNovoPost.value.trim() !== "") {
+                    const conteudoDoPost = inputNovoPost.value;
+                    const novoPost = document.createElement('div');
+                    novoPost.className = 'post-card';
+                    
+                    novoPost.innerHTML = `
+                        <div class="post-header">
+                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Jorge Filho">
+                            <div class="post-info">
+                                <h4 class="nome-perfil-clicavel">Jorge Filho</h4>
+                                <span>Postou uma nova atividade • Agora mesmo</span>
+                            </div>
+                            <button class="icon-btn-share"><i class="fa-solid fa-share-nodes"></i></button>
+                        </div>
+                        <div class="post-content">
+                            ${conteudoDoPost}
+                        </div>
+                        <div class="post-footer">
+                            <button class="interactive-icon btn-responder" title="Responder"><i class="fa-solid fa-reply"></i></button>
+                            <button class="interactive-icon btn-curtir" title="Curtir"><i class="fa-regular fa-heart"></i></button>
+                            <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter">
+                            <button class="interactive-icon btn-salvar" title="Salvar"><i class="fa-regular fa-bookmark"></i></button>
+                        </div>
+                    `;
+
+                    feedContainer.insertBefore(novoPost, feedContainer.firstChild);
+                    inputNovoPost.value = "";
+
+                    adicionarInteratividadeAoPost(novoPost);
+                    aplicarCliquesDePerfil(novoPost);
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('.post-card').forEach(post => {
+        adicionarInteratividadeAoPost(post);
+        aplicarCliquesDePerfil(post);
     });
-}
+
+    const btnConfirmar = document.getElementById('btn-confirmar-presenca');
+    if (btnConfirmar) {
+        btnConfirmar.addEventListener('click', function() {
+            if (this.textContent === "Confirmar presença") {
+                this.textContent = "✓ Presença Confirmada!";
+                this.style.backgroundColor = "#28a745";
+                this.style.color = "#fff";
+            } else {
+                this.textContent = "Confirmar presença";
+                this.style.backgroundColor = "";
+                this.style.color = "";
+            }
+        });
+    }
+});
