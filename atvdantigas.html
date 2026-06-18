@@ -2,9 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>UNIHUB - Perfil</title>
+    <title>UNIHUB - Atividades Antigas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style-perfil.css">
+    <link class="profile-style" rel="stylesheet" href="css/style-perfil.css">
 </head>
 <body>
     <nav class="navbar">
@@ -34,7 +34,7 @@
         <section class="profile-card">
             <div class="profile-header">
                 <a href="editar-perfil.html">
-                    <button class="btn-edit-profile"><i class="fa-regular fa-user-gear"></i> Editar Perfil</button>
+                    <button class="btn-edit-profile"><i class="fa-solid fa-pen"></i> Editar Perfil</button>
                 </a>
             </div>
             <div class="profile-body">
@@ -54,52 +54,53 @@
         </section>
 
         <section class="tabs-container">
-            <div class="tab active"><i class="fa-solid fa-bookmark"></i> Eventos Salvos</div>
-            <a href="atvdantigas.html" class="tab" style="text-decoration: none;"><i class="fa-regular fa-clock-rotate-left"></i> Atividades Antigas</a>
+            <a href="perfil.html" class="tab" style="text-decoration: none;"><i class="fa-solid fa-bookmark"></i> Eventos Salvos</a>
+            <div class="tab active"><i class="fa-solid fa-clock-rotate-left"></i> Atividades Antigas</div>
             <a href="conquistas.html" class="tab" style="text-decoration: none;"><i class="fa-solid fa-trophy"></i> Conquistas</a>
         </section>
 
         <section class="events-list">
-            
             <div class="event-card">
-                <div class="event-left" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 70px;">
-                    <i class="fa-regular fa-calendar-days" style="font-size: 2.2rem; color: #333;"></i>
-                    <span class="edit-pill" style="margin-top: 8px;">EDITAR</span>
+                <div class="event-left">
+                    <div class="success-box" style="display: flex; align-items: center; justify-content: center; background: none;">
+                        <i class="fa-solid fa-circle-check" style="font-size: 1.8rem; color: #7ba0d4;"></i>
+                    </div>
                 </div>
                 <div class="event-middle">
-                    <h3>Aula de Monitoria: Pol.Edu</h3>
+                    <h3>Basquete no Aterro do Flamengo</h3>
                     <p class="desc-label">Descrição:</p>
-                    <p class="desc-text">Nova monitoria do mês de Abril de Política Educacional</p>
+                    <p class="desc-text">racha do pessoal no aterro do flamengo!! apareçamm!!!</p>
                 </div>
                 <div class="event-right">
                     <span class="info-label">DATA</span>
-                    <span class="info-value">29/04</span>
+                    <span class="info-value">29/02</span>
                     <span class="info-label">HORA</span>
                     <span class="info-value">17:00</span>
                     <span class="info-label">LOCAL</span>
-                    <span class="info-value-small">SALA 215 CCH</span>
+                    <span class="info-value-small">ATERRO DO FLAMENGO</span>
                 </div>
             </div>
 
             <div class="event-card">
-                <div class="event-left" style="display: flex; align-items: center; justify-content: center; min-width: 70px;">
-                    <i class="fa-regular fa-calendar-days" style="font-size: 2.2rem; color: #333;"></i>
+                <div class="event-left">
+                    <div class="success-box" style="display: flex; align-items: center; justify-content: center; background: none;">
+                        <i class="fa-solid fa-circle-check" style="font-size: 1.8rem; color: #7ba0d4;"></i>
+                    </div>
                 </div>
                 <div class="event-middle">
-                    <h3>Aula de yoga no CLA</h3>
+                    <h3>Aula de Monitoria: Pol.Edu</h3>
                     <p class="desc-label">Descrição:</p>
-                    <p class="desc-text">Aula de yoga no CLA!!</p>
+                    <p class="desc-text">Vou dar uma aula da matéria de Política Educacional para os alunos de Pedagogia.</p>
                 </div>
                 <div class="event-right">
                     <span class="info-label">DATA</span>
-                    <span class="info-value">13/04</span>
+                    <span class="info-value">31/03</span>
                     <span class="info-label">HORA</span>
-                    <span class="info-value">17:00</span>
+                    <span class="info-value">14:00</span>
                     <span class="info-label">LOCAL</span>
-                    <span class="info-value-small">CLA</span>
+                    <span class="info-value-small">Sala 215 CCH</span>
                 </div>
             </div>
-            
         </section>
     </main>
 
