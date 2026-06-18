@@ -1,19 +1,25 @@
 const btnEntrar = document.getElementById('btn-entrar');
 const inputEmail = document.getElementById('email');
 const inputSenha = document.getElementById('senha');
-const btnCrieConta = document.getElementById('btn-crie-conta');
+const btnCrieConta = document.getElementById('btn-crie-sua-conta');
+const erroLogin = document.getElementById('erro-login');
 
 if (btnEntrar) {
     btnEntrar.addEventListener('click', function() {
         const email = inputEmail.value;
         const senha = inputSenha.value;
 
+        erroLogin.textContent = "";
+
         if (email === "" || senha === "") {
-            alert("Por favor, preencha todos os campos!");
-        } else if (email.includes("@unirio.br") || email.includes("@edu.unirio.br")) { 
-            window.location.href = "timeline.html"; 
+            erroLogin.textContent = "Por favor, preencha todos os campos!";
+        } else if (!email.includes("@unirio.br") && !email.includes("@edu.unirio.br")) {
+            erroLogin.textContent = "Use um e-mail institucional da UNIRIO.";
+        } else if (senha.length < 4) { // Exemplo de validação de senha
+            erroLogin.textContent = "Senha inválida!";
         } else {
-            alert("Use um e-mail institucional da UNIRIO.");
+            erroLogin.textContent = "";
+            window.location.href = "timeline.html"; 
         }
     });
 }
