@@ -45,3 +45,60 @@ if (btnEsqueceuSenha) {
         }
     });
 }
+
+
+const btnProsseguir = document.getElementById('btn-prosseguir');
+const inputCadEmail = document.getElementById('cad-email');
+const inputCadSenha = document.getElementById('cad-senha');
+const inputConfirmaSenha = document.getElementById('cad-confirma-senha');
+const erroCadastro = document.getElementById('erro-cadastro');
+
+if (btnProsseguir) {
+    btnProsseguir.addEventListener('click', function() {
+        const email = inputCadEmail.value;
+        const senha = inputCadSenha.value;
+        const confirmaSenha = inputConfirmaSenha.value;
+
+        erroCadastro.textContent = "";
+
+        if (email === "" || senha === "" || confirmaSenha === "") {
+            erroCadastro.textContent = "Por favor, preencha todos os campos!";
+        } 
+        else if (!email.includes("@unirio.br") && !email.includes("@edu.unirio.br")) {
+            erroCadastro.textContent = "Use um e-mail institucional da UNIRIO.";
+        } 
+        else if (senha.length < 4) {
+            erroCadastro.textContent = "A senha deve ter pelo menos 4 caracteres.";
+        } 
+        else if (senha !== confirmaSenha) {
+            erroCadastro.textContent = "As senhas não coincidem!";
+        } 
+        else {
+            erroCadastro.textContent = "";
+            window.location.href = "cadastro2.html";
+        }
+    });
+}
+
+const btnCriarConta = document.getElementById('btn-criar-conta');
+const inputCadNome = document.getElementById('cad-nome');
+const inputCadNascimento = document.getElementById('cad-nascimento');
+const inputCadCurso = document.getElementById('cad-curso');
+const erroDados = document.getElementById('erro-dados');
+
+if (btnCriarConta) {
+    btnCriarConta.addEventListener('click', function() {
+        const nome = inputCadNome.value.trim();
+        const nascimento = inputCadNascimento.value.trim();
+        const curso = inputCadCurso.value.trim();
+
+        erroDados.textContent = "";
+
+        if (nome === "" || nascimento === "" || curso === "") {
+            erroDados.textContent = "Por favor, preencha todos os seus dados pessoais!";
+        } else {
+            erroDados.textContent = "";
+            window.location.href = "timeline.html";
+        }
+    });
+}

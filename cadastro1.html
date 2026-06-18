@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro UniHub - Passo 1</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -11,7 +11,7 @@
         
         <div class="lado-azul">
             <div class="conteudo-central">
-                <img src="logo.png" class="logo-img">
+                <img src="images/logo.png" class="logo-img">
                 <p>UNIHUB - O seu radar de eventos na universidade.</p>
             </div>
         </div>
@@ -23,17 +23,17 @@
                 <div class="caixa-cadastro">
                     <h2>FAÇA SEU CADASTRO</h2>
                     
-                    <input type="text" placeholder="EMAIL@EDU.UNIRIO.BR">
-                    <input type="password" placeholder="SENHA">
-                    <input type="password" placeholder="CONFIRME SUA SENHA">
+                    <input type="text" id="cad-email" placeholder="EMAIL@EDU.UNIRIO.BR">
+                    <input type="password" id="cad-senha" placeholder="SENHA">
+                    <input type="password" id="cad-confirma-senha" placeholder="CONFIRME SUA SENHA">
                     
-                    <a href="cadastro2.html">
-                        <button class="btn-azul">PROSSEGUIR</button>
-                    </a>
+                    <p id="erro-cadastro" class="mensagem-erro"></p> 
+                    
+                    <button id="btn-prosseguir" class="btn-azul">PROSSEGUIR</button>
                     
                     <div class="divisor">OU</div>
                     
-                    <a href="index.html">
+                    <a href="index.html" style="text-decoration: none; width: 100%;">
                         <button class="btn-azul">VOLTAR PARA LOGIN</button>
                     </a>
                 </div>
@@ -41,6 +41,7 @@
         </div>
 
     </div>
-
+    
+    <script src="script.js"></script>
 </body>
 </html>
