@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>UNIHUB - Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style-perfil.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
-                <img src="images/logo.png" class="nav-logo" alt="Logo">
-                <span class="nav-title">UNIHUB</span>
+                <a href="timeline.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+                    <img src="images/logo.png" class="nav-logo" alt="Logo">
+                    <span class="nav-title">UNIHUB</span>
+                </a>
             </div>
-            <input type="text" class="search-bar" placeholder="Buscar futsal, vôlei...">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Buscar futsal, vôlei...">
             <div class="nav-right">
-                <div class="notif-icon">💬<span class="badge">3</span></div>
-                <a href="#">Início</a>
-                <a href="#">Criar Evento</a>
-                <a href="#">Perfil</a>
+                <a href="chat.html" class="nav-item-link" title="Mensagens">
+                    <div class="notif-icon"><i class="fa-regular fa-comment-dots"></i><span class="badge">3</span></div>
+                </a>
+                <a href="timeline.html">Início</a>
+                <a href="formulario.html">Criar Evento</a>
+                <a href="perfil.html" class="active">Perfil</a>
+                <a href="#" id="btn-sair" class="logout-link" title="Sair" style="color: #ff3333; font-size: 1.2rem; margin-left: 15px; display: flex; align-items: center; background: none; border: none; cursor: pointer;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -25,13 +33,13 @@
     <main class="profile-container">
         <section class="profile-card">
             <div class="profile-header">
-                    <a href="editar-perfil.html">
-                <button class="btn-edit-profile">Editar Perfil</button>
-                    </a>
+                <a href="editar-perfil.html">
+                    <button class="btn-edit-profile"><i class="fa-regular fa-user-gear"></i> Editar Perfil</button>
+                </a>
             </div>
             <div class="profile-body">
                 <div class="avatar-wrapper">
-                    <img src="avatar-jorge.png" class="avatar-large" alt="Jorge Filho">
+                    <img src="images/avatar-jorge.png" class="avatar-large" alt="Jorge Filho">
                 </div>
                 <h2>Jorge Filho</h2>
                 <p class="course">CCH - Pedagogia</p>
@@ -39,31 +47,24 @@
                 <p class="bio">Gosto de esportes calmos</p>
                 
                 <div class="side-badges">
-                    <span class="badge-icon">🏆</span>
-                    <span class="badge-icon">🥇</span>
+                    <span class="badge-icon" title="Campeão">🏆</span>
+                    <span class="badge-icon" title="Primeiro Lugar">🥇</span>
                 </div>
             </div>
         </section>
 
         <section class="tabs-container">
-            <div class="tab active">Eventos Salvos</div>
-            <div class="tab">Atividades Antigas</div>
-            <div class="tab">Conquistas</div>
+            <div class="tab active"><i class="fa-solid fa-bookmark"></i> Eventos Salvos</div>
+            <a href="atividades.html" class="tab" style="text-decoration: none;"><i class="fa-regular fa-clock-rotate-left"></i> Atividades Antigas</a>
+            <a href="conquistas.html" class="tab" style="text-decoration: none;"><i class="fa-solid fa-trophy"></i> Conquistas</a>
         </section>
 
         <section class="events-list">
+            
             <div class="event-card">
-                <div class="event-left">
-                    <svg class="calendar-svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                        <rect x="6" y="14" width="3" height="3" fill="black" stroke="none"></rect>
-                        <rect x="10.5" y="14" width="3" height="3" fill="black" stroke="none"></rect>
-                        <rect x="15" y="14" width="3" height="3" fill="black" stroke="none"></rect>
-                    </svg>
-                    <span class="edit-pill">EDITAR</span>
+                <div class="event-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 70px;">
+                    <i class="fa-regular fa-calendar-days" style="font-size: 2.2rem; color: #333;"></i>
+                    <span class="edit-pill" style="margin-top: 8px;">EDITAR</span>
                 </div>
                 <div class="event-middle">
                     <h3>Aula de Monitoria: Pol.Edu</h3>
@@ -81,16 +82,8 @@
             </div>
 
             <div class="event-card">
-                <div class="event-left">
-                    <svg class="calendar-svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                        <rect x="6" y="14" width="3" height="3" fill="black" stroke="none"></rect>
-                        <rect x="10.5" y="14" width="3" height="3" fill="black" stroke="none"></rect>
-                        <rect x="15" y="14" width="3" height="3" fill="black" stroke="none"></rect>
-                    </svg>
+                <div class="event-left" style="display: flex; align-items: center; justify-content: center; min-width: 70px;">
+                    <i class="fa-regular fa-calendar-days" style="font-size: 2.2rem; color: #333;"></i>
                 </div>
                 <div class="event-middle">
                     <h3>Aula de yoga no CLA</h3>
@@ -106,7 +99,10 @@
                     <span class="info-value-small">CLA</span>
                 </div>
             </div>
+            
         </section>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
