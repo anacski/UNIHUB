@@ -116,6 +116,7 @@ if (btnCriarConta) {
         }
         localStorage.setItem('unihub_nome', nome);
         localStorage.setItem('unihub_curso', curso);
+        localStorage.setItem('unihub_idade', idade + " Anos");
         erroDados.textContent = "";
         window.location.href = "timeline.html";
     });
@@ -124,17 +125,24 @@ if (btnCriarConta) {
 document.addEventListener("DOMContentLoaded", function() {
     const nomeSalvo = localStorage.getItem('unihub_nome') || "Jorge Filho";
     const cursoSalvo = localStorage.getItem('unihub_curso') || "CCH - Pedagogia";
+    const idadeSalva = localStorage.getItem('unihub_idade') || "21 Anos";
+    const bioSalva = localStorage.getItem('unihub_bio') || "Gosto de esportes calmos";
 
-    document.querySelectorAll('.nome-perfil-clicavel, .profile-body h2').forEach(el => {
-        if(el.tagName === 'H2' && el.parentElement.classList.contains('profile-body')) {
-            el.textContent = nomeSalvo;
-        } else if(!el.closest('.post-card')) {
-            el.textContent = nomeSalvo;
-        }
+    document.querySelectorAll('.nome-perfil-clicavel').forEach(el => {
+        el.textContent = nomeSalvo;
     });
 
+    const elPerfilNome = document.querySelector('.profile-body h2');
+    if (elPerfilNome) elPerfilNome.textContent = nomeSalvo;
+
     const txtCurso = document.querySelector('.profile-body .course');
-    if(txtCurso) txtCurso.textContent = cursoSalvo;
+    if (txtCurso) txtCurso.textContent = cursoSalvo;
+
+    const txtIdade = document.querySelector('.profile-body .age');
+    if (txtIdade) txtIdade.textContent = idadeSalva;
+
+    const txtBio = document.querySelector('.profile-body .bio');
+    if (txtBio) txtBio.textContent = bioSalva;
 
     const inputBusca = document.querySelector('.search-bar');
     if (inputBusca) {
@@ -232,88 +240,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    const feedContainer = document.getElementById('feed-container');
-    if (inputNovoPost && feedContainer) {
-        inputNovoPost.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault(); 
-                if (inputNovoPost.value.trim() !== "") {
-                    const conteudoDoPost = inputNovoPost.value;
-                    const novoPost = document.createElement('div');
-                    novoPost.className = 'post-card';
-                    novoPost.innerHTML = `
-                        <div class="post-header">
-                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
-                            <div class="post-info">
-                                <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
-                                <span>Postou uma nova atividade • Agora mesmo</span>
-                            </div>
-                            <!-- Novo botão verde inserido na criação de posts -->
-                            <button class="icon-btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #28a745; font-size: 1.2rem;">
-                                <i class="fa-solid fa-retweet"></i>
-                            </button>
-                        </div>
-                        <div class="post-content" style="padding: 10px 0;">
-                            ${conteudoDoPost}
-                        </div>
-                        <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
-                        <div class="post-footer" style="display:flex; align-items:center; gap:10px;">
-                            <button class="interactive-icon btn-responder" title="Responder" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-reply"></i></button>
-                            <button class="interactive-icon btn-curtir" title="Curtir" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-heart"></i></button>
-                            <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:4px;">
-                            <button class="interactive-icon btn-salvar" title="Salvar" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-bookmark"></i></button>
-                        </div>
-                    `;
-                    feedContainer.insertBefore(novoPost, feedContainer.firstChild);
-                    inputNovoPost.value = "";
-                    adicionarInteratividadeAoPost(novoPost);
-                    aplicarCliquesDePerfil(novoPost);
-                }
-            }
-        });
-    }
-
-    const feedContainer = document.getElementById('feed-container');
-    if (inputNovoPost && feedContainer) {
-        inputNovoPost.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault(); 
-                if (inputNovoPost.value.trim() !== "") {
-                    const conteudoDoPost = inputNovoPost.value;
-                    const novoPost = document.createElement('div');
-                    novoPost.className = 'post-card';
-                    novoPost.innerHTML = `
-                        <div class="post-header">
-                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
-                            <div class="post-info">
-                                <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
-                                <span>Postou uma nova atividade • Agora mesmo</span>
-                            </div>
-                            </div>
-                        <div class="post-content" style="padding: 10px 0;">
-                            ${conteudoDoPost}
-                        </div>
-                        <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
-                        <div class="post-footer" style="display:flex; align-items:center; gap:10px;">
-                            <button class="interactive-icon btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #666; font-size: 1.2rem;"><i class="fa-solid fa-retweet"></i></button>
-                            <button class="interactive-icon btn-curtir" title="Curtir" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-heart"></i></button>
-                            <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:4px;">
-                            <button class="interactive-icon btn-salvar" title="Salvar" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-bookmark"></i></button>
-                        </div>
-                    `;
-                    feedContainer.insertBefore(novoPost, feedContainer.firstChild);
-                    inputNovoPost.value = "";
-                    adicionarInteratividadeAoPost(novoPost);
-                    aplicarCliquesDePerfil(novoPost);
-                }
-            }
-        });
-    }
-
     function adicionarInteratividadeAoPost(postCard) {
         const btnCurtir = postCard.querySelector('.btn-curtir');
         const btnSalvar = postCard.querySelector('.btn-salvar');
-        const btnRepublicar = postCard.querySelector('.btn-republicar'); 
+        const btnCompartilhar = postCard.querySelector('.icon-btn-share');
+        const btnResponder = postCard.querySelector('.btn-responder');
         const inputComentario = postCard.querySelector('.input-comentario');
         const listaComentarios = postCard.querySelector('.comments-list') || postCard.querySelector('.post-comments');
 
@@ -345,42 +276,24 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        if (btnRepublicar) {
-            btnRepublicar.addEventListener('click', function() {
+        if (btnCompartilhar) {
+            btnCompartilhar.addEventListener('click', function() {
                 this.classList.toggle('ativo');
-                
+                const icone = this.querySelector('i');
                 if (this.classList.contains('ativo')) {
-                    this.style.color = "#28a745"; 
-                    
-                    const feedContainer = document.getElementById('feed-container');
-                    if (feedContainer) {
-                        const postClonado = postCard.cloneNode(true);
-                        
-                        const btnRepublicarClone = postClonado.querySelector('.btn-republicar');
-                        if (btnRepublicarClone) {
-                            btnRepublicarClone.classList.remove('ativo');
-                            btnRepublicarClone.style.color = "#666";
-                        }
-
-                        const inputComentarioClone = postClonado.querySelector('.input-comentario');
-                        if (inputComentarioClone) inputComentarioClone.value = '';
-                        
-                        const listaComentariosClone = postClonado.querySelector('.comments-list') || postClonado.querySelector('.post-comments');
-                        if (listaComentariosClone) listaComentariosClone.innerHTML = '';
-                        
-                        const postInfoTexto = postClonado.querySelector('.post-info span');
-                        if (postInfoTexto) postInfoTexto.textContent = "Republicou esta atividade • Agora mesmo";
-
-                        feedContainer.insertBefore(postClonado, feedContainer.firstChild);
-
-                        adicionarInteratividadeAoPost(postClonado);
-                        if (typeof aplicarCliquesDePerfil === "function") {
-                            aplicarCliquesDePerfil(postClonado);
-                        }
-                    }
+                    this.style.color = "#28a745";
+                    icone.className = "fa-solid fa-retweet";
+                    alert("Compartilhado na sua linha do tempo!");
                 } else {
-                    this.style.color = "#666"; 
+                    this.style.color = "";
+                    icone.className = "fa-solid fa-share-nodes";
                 }
+            });
+        }
+
+        if (btnResponder) {
+            btnResponder.addEventListener('click', function() {
+                if(inputComentario) inputComentario.focus();
             });
         }
 
@@ -389,7 +302,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (e.key === 'Enter' && this.value.trim() !== "") {
                     const texto = this.value.trim();
                     const item = document.createElement('div');
-                    const nomeSalvo = localStorage.getItem('unihub_nome') || "Jorge Filho";
                     item.className = 'comment-item';
                     item.style.padding = "6px 10px";
                     item.style.borderTop = "1px solid #eee";
@@ -402,11 +314,46 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    if (inputNovoPost && feedContainer) {
+        inputNovoPost.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); 
+                if (inputNovoPost.value.trim() !== "") {
+                    const conteudoDoPost = inputNovoPost.value;
+                    const novoPost = document.createElement('div');
+                    novoPost.className = 'post-card';
+                    novoPost.innerHTML = `
+                        <div class="post-header">
+                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
+                            <div class="post-info">
+                                <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
+                                <span>Postou uma nova atividade • Agora mesmo</span>
+                            </div>
+                            <button class="icon-btn-share" title="Compartilhar" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-share-nodes"></i></button>
+                        </div>
+                        <div class="post-content" style="padding: 10px 0;">
+                            ${conteudoDoPost}
+                        </div>
+                        <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
+                        <div class="post-footer" style="display:flex; align-items:center; gap:10px;">
+                            <button class="interactive-icon btn-responder" title="Responder" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-reply"></i></button>
+                            <button class="interactive-icon btn-curtir" title="Curtir" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-heart"></i></button>
+                            <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:4px;">
+                            <button class="interactive-icon btn-salvar" title="Salvar" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-bookmark"></i></button>
+                        </div>
+                    `;
+                    feedContainer.insertBefore(novoPost, feedContainer.firstChild);
+                    inputNovoPost.value = "";
+                    adicionarInteratividadeAoPost(novoPost);
+                    aplicarCliquesDePerfil(novoPost);
+                }
+            }
+        });
+    }
+
     document.querySelectorAll('.post-card').forEach(post => {
         adicionarInteratividadeAoPost(post);
-        if (typeof aplicarCliquesDePerfil === "function") {
-            aplicarCliquesDePerfil(post);
-        }
+        aplicarCliquesDePerfil(post);
     });
 
     const btnConfirmar = document.getElementById('btn-confirmar-presenca');
@@ -427,10 +374,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputEditNome = document.getElementById('edit-nome');
     const inputEditCurso = document.getElementById('edit-curso');
     const inputEditIdade = document.getElementById('edit-idade');
+    const inputEditBio = document.getElementById('edit-bio');
     const formEditarPerfil = document.getElementById('edit-profile-form');
 
     if(inputEditNome && nomeSalvo) inputEditNome.value = nomeSalvo;
     if(inputEditCurso && cursoSalvo) inputEditCurso.value = cursoSalvo;
+    if(inputEditIdade && idadeSalva) inputEditIdade.value = parseInt(idadeSalva) || "";
+    if(inputEditBio && bioSalva) inputEditBio.value = bioSalva;
 
     if (inputEditNome) {
         inputEditNome.addEventListener('input', function(e) {
@@ -448,7 +398,8 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
             const nomeVal = inputEditNome.value.trim();
             const cursoVal = inputEditCurso.value.trim();
-            const idadeVal = inputEditIdade ? parseInt(inputEditIdade.value.trim()) : 21;
+            const idadeVal = inputEditIdade ? parseInt(inputEditIdade.value.trim()) : "";
+            const bioVal = inputEditBio ? inputEditBio.value.trim() : "";
 
             if(nomeVal === "" || cursoVal === "") {
                 alert("Os campos Nome e Curso não podem ficar vazios.");
@@ -461,6 +412,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             localStorage.setItem('unihub_nome', nomeVal);
             localStorage.setItem('unihub_curso', cursoVal);
+            if(idadeVal) localStorage.setItem('unihub_idade', idadeVal + " Anos");
+            localStorage.setItem('unihub_bio', bioVal);
+
             alert("Alterações salvas com sucesso!");
             window.location.href = "perfil.html"; 
         });
