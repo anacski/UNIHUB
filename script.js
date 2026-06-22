@@ -220,7 +220,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    /* === INJEÇÃO DO EVENTO IDÊNTICO AO DA MARIA ALICE === */
     const eventoPendente = localStorage.getItem('unihub_novo_evento');
     if (eventoPendente && feedContainer) {
         const dados = JSON.parse(eventoPendente);
@@ -250,14 +249,12 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
         
-        // Insere no topo do feed-container (logo após a div de sem resultados)
         feedContainer.insertBefore(cardEvento, feedContainer.children[1]);
         localStorage.removeItem('unihub_novo_evento');
         
         adicionarInteratividadeAoPost(cardEvento);
         aplicarCliquesDePerfil(cardEvento);
 
-        // Ativa a funcionalidade do botão de presença dinâmico
         const btnNovoConfirmar = cardEvento.querySelector('.btn-confirm');
         if (btnNovoConfirmar) {
             btnNovoConfirmar.addEventListener('click', function() {
@@ -269,7 +266,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    /* === INJEÇÃO DO POST RÁPIDO IDÊNTICO AO DO JORGE FILHO === */
     if (inputNovoPost && feedContainer) {
         inputNovoPost.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -309,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Aplica interatividade para os posts que já vieram fixos no HTML
     document.querySelectorAll('.post-card').forEach(post => {
         adicionarInteratividadeAoPost(post);
         aplicarCliquesDePerfil(post);
@@ -423,7 +418,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-/* === CHAT LOGIC === */
 const btnClip = document.getElementById('btn-clip-attach');
 const hiddenFileChat = document.getElementById('chat-hidden-file');
 const inputChat = document.getElementById('chat-input-field');
