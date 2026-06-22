@@ -76,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const idadeSalva = localStorage.getItem('unihub_idade') || "21 Anos";
     const bioSalva = localStorage.getItem('unihub_bio') || "Gosto de esportes calmos";
 
-
     document.querySelectorAll('.nome-perfil-clicavel').forEach(el => el.textContent = nomeSalvo);
     const txtCurso = document.querySelector('.profile-body .course');
     if (txtCurso) txtCurso.textContent = cursoSalvo;
@@ -84,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (txtIdade) txtIdade.textContent = idadeSalva;
     const txtBio = document.querySelector('.profile-body .bio');
     if (txtBio) txtBio.textContent = bioSalva;
-
 
     const inputNovoPost = document.getElementById('input-novo-post');
     const feedContainer = document.getElementById('feed-container');
@@ -223,6 +221,69 @@ document.addEventListener("DOMContentLoaded", function() {
         adicionarInteratividadeAoPost(post);
         aplicarCliquesDePerfil(post);
     });
+
+    
+    const botoesAcao = document.querySelectorAll('.action-btn');
+    const hiddenPhotoInput = document.getElementById('hidden-photo-input');
+    const hiddenVideoInput = document.getElementById('hidden-video-input');
+    const hiddenDateInput = document.getElementById('hidden-date-input');
+
+    botoesAcao.forEach(botao => {
+        botao.style.cursor = "pointer";
+        botao.addEventListener('click', function() {
+            const textoBotao = this.textContent.trim();
+            
+            if (textoBotao.includes("Foto") && hiddenPhotoInput) {
+                hiddenPhotoInput.click();
+            } else if (textoBotao.includes("Vídeo") && hiddenVideoInput) {
+                hiddenVideoInput.click();
+            } else if (textoBotao.includes("Data") && hiddenDateInput) {
+                if (typeof hiddenDateInput.showPicker === 'function') {
+                    hiddenDateInput.showPicker();
+                } else {
+                    hiddenDateInput.click();
+                }
+            } else if (textoBotao.includes("Câmera")) {
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(function(stream) {
+                            alert("Permissão concedida! Câmera conectada com sucesso.");
+                            stream.getTracks().forEach(track => track.stop());
+                        })
+                        .catch(function() {
+                            alert("Acesso à câmera negado ou dispositivo não encontrado.");
+                        });
+                }
+            }
+        });
+    });
+
+    if (hiddenPhotoInput) {
+        hiddenPhotoInput.addEventListener('change', function() {
+            if (this.files.length > 0 && inputNovoPost) {
+                const nomes = Array.from(this.files).map(f => f.name).join(', ');
+                inputNovoPost.value += ` [Imagens: ${nomes}]`;
+            }
+        });
+    }
+
+    if (hiddenVideoInput) {
+        hiddenVideoInput.addEventListener('change', function() {
+            if (this.files.length > 0 && inputNovoPost) {
+                inputNovoPost.value += ` [Vídeo: ${this.files[0].name}]`;
+            }
+        });
+    }
+
+    if (hiddenDateInput) {
+        hiddenDateInput.addEventListener('change', function() {
+            if (this.value && inputNovoPost) {
+                const dataFormatada = this.value.split('-').reverse().join('/');
+                inputNovoPost.value += ` [Evento: ${dataFormatada}]`;
+            }
+        });
+    }
+
     
     const inputBusca = document.querySelector('.search-bar');
     if (inputBusca) {
