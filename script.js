@@ -284,15 +284,31 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    
     const inputBusca = document.querySelector('.search-bar');
+    const msgSemResultados = document.getElementById('sem-resultados');
+
     if (inputBusca) {
         inputBusca.addEventListener('input', function() {
             const termo = this.value.toLowerCase().trim();
-            document.querySelectorAll('.post-card').forEach(card => {
-                const texto = card.textContent.toLowerCase();
-                card.style.display = texto.includes(termo) ? "" : "none";
+            const cards = document.querySelectorAll('#feed-container .post-card');
+            let encontrouAlgo = false;
+
+            cards.forEach(card => {
+                const textoCard = card.textContent.toLowerCase();
+
+                if (textoCard.includes(termo)) {
+                    card.style.display = ""; 
+                    encontrouAlgo = true;
+                } else {
+                    card.style.display = "none"; 
+                }
             });
+
+            if (!encontrouAlgo && termo !== "") {
+                if (msgSemResultados) msgSemResultados.style.display = "block";
+            } else {
+                if (msgSemResultados) msgSemResultados.style.display = "none";
+            }
         });
     }
 
