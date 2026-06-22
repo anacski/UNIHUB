@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>UNIHUB - Chat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style-timeline.css">
     <link rel="stylesheet" href="css/style-chat.css"> 
 </head>
 <body>
@@ -22,7 +23,7 @@
                 </a>
                 <a href="timeline.html">Início</a>
                 <a href="formulario.html">Criar Evento</a>
-                <a href="perfil.html">Perfil</a>
+                <a href="perfil.html" id="nav-perfil-link">Perfil</a>
                 <a href="#" id="btn-sair" class="logout-link" title="Sair" style="color: #ff3333; font-size: 1.2rem; margin-left: 15px; display: flex; align-items: center; background: none; border: none; cursor: pointer;">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
@@ -33,7 +34,7 @@
     <main class="chat-container">
         <aside class="sidebar-chats">
             <div class="chat-list">
-                <div class="chat-item">
+                <div class="chat-item" style="cursor: pointer;" data-grupo="Xadrezin">
                     <img src="images/icon-xadrez.png" class="chat-avatar" alt="Xadrezin">
                     <div class="chat-info">
                         <h4>Xadrezin</h4>
@@ -42,7 +43,7 @@
                     <span class="chat-time">15:17</span>
                 </div>
 
-                <div class="chat-item active">
+                <div class="chat-item active" style="cursor: pointer;" data-grupo="Basquete">
                     <img src="images/icon-basquete.png" class="chat-avatar" alt="Basquete">
                     <div class="chat-info">
                         <h4>Basquete</h4>
@@ -51,7 +52,7 @@
                     <span class="chat-time">12:03</span>
                 </div>
 
-                <div class="chat-item">
+                <div class="chat-item" style="cursor: pointer;" data-grupo="Vôlei">
                     <img src="images/icon-volei.png" class="chat-avatar" alt="Vôlei">
                     <div class="chat-info">
                         <h4>Vôlei sexta-feira 10/04</h4>
@@ -60,7 +61,7 @@
                     <span class="chat-time">10:33</span>
                 </div>
 
-                <div class="chat-item">
+                <div class="chat-item" style="cursor: pointer;" data-grupo="Ping pong">
                     <img src="images/icon-pingpong.png" class="chat-avatar" alt="Ping pong">
                     <div class="chat-info">
                         <h4>Ping pong do CALOVE</h4>
@@ -79,13 +80,10 @@
 
         <section class="main-chat">
             <header class="chat-header">
-                <div class="chat-header-info">
-                    <img src="images/icon-basquete.png" class="chat-avatar" alt="Basquete">
-                    <h2>Basquete</h2>
+                <div class="chat-header-info" id="chat-header-atual">
+                    <img src="images/icon-basquete.png" class="chat-avatar" id="header-avatar" alt="Basquete">
+                    <h2 id="header-nome">Basquete</h2>
                 </div>
-                <button class="btn-options" style="background: none; border: none; cursor: pointer; padding: 5px;">
-                    <i class="fa-solid fa-ellipsis-vertical" style="font-size: 1.2rem;"></i>
-                </button>
             </header>
 
             <div class="chat-messages" id="chat-messages-container">
@@ -115,9 +113,11 @@
             <footer class="chat-input-area">
                 <div class="input-wrapper">
                     <input type="text" id="chat-input-field" placeholder="Digite uma mensagem...">
-                    <button class="btn-attach" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
+            
+                    <button class="btn-attach" id="btn-clip-attach" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
                         <i class="fa-solid fa-paperclip"></i>
                     </button>
+                    <input type="file" id="chat-hidden-file" style="display: none;">
                 </div>
                 <button class="btn-send" id="btn-send-message" style="border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
                     <i class="fa-solid fa-paper-plane"></i>
