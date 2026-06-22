@@ -222,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function() {
         aplicarCliquesDePerfil(post);
     });
 
-    
     const botoesAcao = document.querySelectorAll('.action-btn');
     const hiddenPhotoInput = document.getElementById('hidden-photo-input');
     const hiddenVideoInput = document.getElementById('hidden-video-input');
@@ -333,13 +332,48 @@ document.addEventListener("DOMContentLoaded", function() {
 const btnClip = document.getElementById('btn-clip-attach');
 const hiddenFileChat = document.getElementById('chat-hidden-file');
 const inputChat = document.getElementById('chat-input-field');
+const btnEnviarMsg = document.getElementById('btn-send-message');
+const containerMensagens = document.getElementById('chat-messages-container');
 
 if (btnClip && hiddenFileChat) {
-    btnClip.addEventListener('click', () => hiddenFileChat.click());
+    btnClip.addEventListener('click', function(e) {
+        e.preventDefault();
+        hiddenFileChat.click();
+    });
     
     hiddenFileChat.addEventListener('change', function() {
         if (this.files.length > 0 && inputChat) {
             inputChat.value += ` [Arquivo: ${this.files[0].name}]`;
+            inputChat.focus();
+        }
+    });
+}
+
+function enviarMensagemChat() {
+    if (!inputChat || !containerMensagens) return;
+    const textoMensagem = inputChat.value.trim();
+    if (textoMensagem !== "") {
+        const novaMsgDiv = document.createElement('div');
+        novaMsgDiv.className = 'message right';
+        novaMsgDiv.innerHTML = `<div class="bubble blue">${textoMensagem}</div>`;
+        containerMensagens.appendChild(novaMsgDiv);
+        inputChat.value = "";
+        containerMensagens.scrollTop = containerMensagens.scrollHeight;
+    }
+}
+
+if (btnEnviarMsg) {
+    btnEnviarMsg.addEventListener('click', function(e) {
+        e.preventDefault();
+        enviarMensagemChat();
+    });
+}
+
+if (inputChat) {
+    inputChat.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            enviarMensagemChat();
         }
     });
 }
@@ -357,5 +391,6 @@ document.querySelectorAll('.chat-item').forEach(item => {
         
         if (headerNome) headerNome.textContent = nomeGrupo;
         if (headerAvatar) headerAvatar.src = srcAvatar;
+        if (inputChat) inputChat.value = "";
     });
 });
