@@ -2,29 +2,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: #f4f6f8;
 }
 
 .navbar {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #0d47a1;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    width: 100%;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    padding: 10px 0;
+    z-index: 100;
 }
 
 .nav-content {
-    max-width: 1000px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 0 20px;
 }
 
@@ -35,25 +37,23 @@ body {
 }
 
 .nav-logo {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
+    width: 60px;
+    height: auto;
 }
 
 .nav-title {
+    color: white;
+    font-size: 20px;
     font-weight: bold;
-    font-size: 1.4rem;
-    color: #4b6b94;
     letter-spacing: 1px;
 }
 
 .search-bar {
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 300px;
+    width: 400px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
     outline: none;
-    background-color: #f0f2f5;
 }
 
 .nav-right {
@@ -63,362 +63,435 @@ body {
 }
 
 .nav-right a {
+    color: white;
     text-decoration: none;
-    color: #666;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.nav-right a:hover, .nav-right a.active {
-    color: #7ba0d4;
+    font-size: 15px;
 }
 
 .notif-icon {
     position: relative;
-    font-size: 1.2rem;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
 }
 
-.badge {
+.notif-icon .badge {
     position: absolute;
-    top: -8px;
+    top: -5px;
     right: -8px;
-    background-color: #ff3333;
+    background-color: red;
     color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.7rem;
+    font-size: 10px;
     font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 50%;
 }
 
 .profile-container {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 40px auto;
     padding: 0 20px;
 }
 
 .profile-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    text-align: center;
-    padding-bottom: 20px;
+    background-color: #dce5d8;
+    border-radius: 10px;
+    border: 1px solid #a9b9b0;
     position: relative;
 }
 
 .profile-header {
-    height: 150px;
-    background: linear-gradient(135deg, #7ba0d4, #4b6b94);
+    background-color: #4b6355;
+    height: 100px;
+    border-radius: 10px 10px 0 0;
     position: relative;
-    background-size: cover;
-    background-position: center;
 }
 
 .btn-edit-profile {
     position: absolute;
+    top: 15px;
     right: 15px;
-    bottom: 15px;
-    background: rgba(255, 255, 255, 0.9);
+    background-color: white;
+    color: black;
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 600;
+    padding: 6px 15px;
+    border-radius: 15px;
+    font-size: 14px;
     cursor: pointer;
-    color: #333;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.avatar-wrapper {
-    width: 110px;
-    height: 110px;
-    margin: -55px auto 10px auto;
+.profile-body {
+    text-align: center;
+    padding-bottom: 25px;
     position: relative;
 }
 
+.avatar-wrapper {
+    margin-top: -50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
 .avatar-large {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    border: 5px solid #fff;
+    border: 4px solid white;
     object-fit: cover;
-    background: #fff;
+    background-color: #ccc;
 }
 
 .profile-body h2 {
-    font-size: 1.5rem;
-    color: #222;
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 5px;
 }
 
 .profile-body .course {
-    color: #666;
-    font-size: 0.95rem;
-    margin-top: 2px;
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 3px;
 }
 
 .profile-body .age {
-    color: #999;
-    font-size: 0.85rem;
-    margin-top: 2px;
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 15px;
 }
 
 .profile-body .bio {
-    margin: 12px auto;
-    max-width: 80%;
-    font-size: 0.95rem;
-    color: #444;
+    font-size: 14px;
+    color: #111;
 }
 
 .side-badges {
+    position: absolute;
+    right: 20px;
+    top: 20px;
     display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .badge-icon {
-    font-size: 1.3rem;
-    cursor: help;
+    font-size: 24px;
+    background: #fff;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .tabs-container {
     display: flex;
-    background: #fff;
-    margin: 20px 0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    justify-content: space-around;
+    border-bottom: 2px solid #000;
+    margin: 30px 0 20px 0;
 }
 
 .tab {
-    flex: 1;
-    text-align: center;
-    padding: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #222;
+    text-decoration: none;
     cursor: pointer;
-    font-weight: 600;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.2s, color 0.2s;
+    position: relative;
+    top: 2px;
 }
 
 .tab.active {
-    background-color: #f0f4f8;
-    color: #4b6b94;
-    border-bottom: 3px solid #7ba0d4;
+    border-bottom: 4px solid #1976d2;
 }
 
-.events-list {
+.events-list, .achievements-list {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .event-card {
-    background: #fff;
-    border-radius: 10px;
+    background-color: #7ba0d4;
+    border-radius: 8px;
+    display: flex;
     padding: 15px;
+    color: black;
+}
+
+.event-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+}
+
+.calendar-svg {
+    width: 60px;
+    height: 60px;
+    stroke-width: 2.5;
+}
+
+.success-box {
+    background-color: #00ff5d;
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    justify-content: center;
+}
+
+.success-box svg {
+    width: 50px;
+    height: 50px;
+}
+
+.edit-pill {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 12px;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
 }
 
 .event-middle {
     flex: 1;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .event-middle h3 {
-    font-size: 1.1rem;
+    font-size: 18px;
     margin-bottom: 5px;
-    color: #222;
 }
 
 .desc-label {
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: #999;
+    font-size: 14px;
+    margin-bottom: 2px;
 }
 
 .desc-text {
-    font-size: 0.9rem;
-    color: #555;
+    font-size: 13px;
+    color: #333;
 }
 
 .event-right {
+    min-width: 150px;
+    border-left: 2px solid #333;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    border-left: 1px solid #eee;
-    padding-left: 15px;
-    min-width: 100px;
+    justify-content: center;
 }
 
 .info-label {
-    font-size: 0.7rem;
+    font-size: 12px;
     font-weight: bold;
-    color: #aaa;
+    line-height: 1.2;
 }
 
 .info-value {
-    font-size: 0.95rem;
+    font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: white;
     margin-bottom: 5px;
+    line-height: 1.1;
 }
 
 .info-value-small {
-    font-size: 0.8rem;
+    font-size: 12px;
     font-weight: bold;
-    color: #666;
+    color: white;
+    text-transform: uppercase;
 }
 
-.edit-pill {
-    background: #7ba0d4;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: bold;
+.achievement-card {
+    background-color: #7ba0d4;
+    border-radius: 8px;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+}
+
+.achievement-left {
+    min-width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.badge-circle.purple {
+    background-color: #3b2a5c;
+}
+
+.badge-circle.red {
+    background-color: #e57373;
+}
+
+.achievement-right {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.achievement-right h3 {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 5px;
 }
 
 .edit-container {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .edit-container h3 {
-    margin-bottom: 15px;
-    color: #4b6b94;
+    font-size: 18px;
+    color: #0d47a1;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     display: flex;
     flex-direction: column;
 }
 
 .form-group label {
     font-weight: bold;
+    font-size: 14px;
     margin-bottom: 6px;
     color: #333;
-    font-size: 0.95rem;
 }
 
 .form-group input, 
 .form-group textarea {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: inherit;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 14px;
     outline: none;
     transition: border-color 0.2s;
 }
 
 .form-group input:focus, 
 .form-group textarea:focus {
-    border-color: #7ba0d4;
+    border-color: #0d47a1;
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 70px;
 }
 
 .upload-buttons {
     display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .btn-upload {
-    background: #f0f2f5;
-    border: 1px dashed #7ba0d4;
-    padding: 12px;
-    border-radius: 8px;
+    background-color: #f0f2f5;
+    border: 1px dashed #0d47a1;
+    padding: 10px;
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 500;
-    color: #4b6b94;
+    font-size: 13px;
+    font-weight: bold;
+    color: #0d47a1;
     flex: 1;
     justify-content: center;
-    transition: background 0.2s;
 }
 
 .btn-upload:hover {
-    background: #e2e7f0;
+    background-color: #e3f2fd;
 }
 
 .action-container {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     justify-content: flex-end;
+    margin-top: 10px;
 }
 
 .btn-salvar {
-    background: #28a745;
+    background-color: #2e7d32;
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 10px 22px;
+    border-radius: 6px;
     font-weight: bold;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.2s;
 }
 
 .btn-salvar:hover {
-    background: #218838;
+    background-color: #1b5e20;
 }
 
 .btn-cancelar {
-    background: #dc3545;
+    background-color: #c62828;
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 10px 22px;
+    border-radius: 6px;
     font-weight: bold;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 1rem;
     text-decoration: none;
     text-align: center;
-    transition: background 0.2s;
 }
 
 .btn-cancelar:hover {
-    background: #c82333;
+    background-color: #b71c1c;
 }
 
 .preview-box {
     position: relative;
-    height: 160px;
-    background: #e2e7f0;
-    border-radius: 12px;
-    margin-bottom: 60px;
+    height: 100px;
+    background-color: #4b6355; 
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 45px;
     background-size: cover;
     background-position: center;
 }
 
 .preview-avatar {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border: 4px white solid;
     position: absolute;
-    bottom: -45px;
+    bottom: -40px;
     left: 20px;
     object-fit: cover;
-    background: #fff;
+    background-color: #ccc;
 }
