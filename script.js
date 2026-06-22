@@ -1,123 +1,71 @@
 const btnEntrar = document.getElementById('btn-entrar');
-const inputEmail = document.getElementById('email');
-const inputSenha = document.getElementById('senha');
-const btnCrieConta = document.getElementById('btn-crie-conta'); 
-const erroLogin = document.getElementById('erro-login');
-const btnEsqueceuSenha = document.getElementById('btn-esqueceu-senha');
-
 if (btnEntrar) {
     btnEntrar.addEventListener('click', function() {
-        const email = inputEmail.value;
-        const senha = inputSenha.value;
-        erroLogin.textContent = "";
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+        const erroLogin = document.getElementById('erro-login');
+        if (erroLogin) erroLogin.textContent = "";
+        
         if (email === "" || senha === "") {
-            erroLogin.textContent = "Por favor, preencha todos os campos!";
+            if (erroLogin) erroLogin.textContent = "Por favor, preencha todos os campos!";
         } else if (!email.includes("@unirio.br") && !email.includes("@edu.unirio.br")) {
-            erroLogin.textContent = "Use um e-mail institucional da UNIRIO.";
+            if (erroLogin) erroLogin.textContent = "Use um e-mail institucional da UNIRIO.";
         } else if (senha.length < 4) { 
-            erroLogin.textContent = "Senha inválida!";
+            if (erroLogin) erroLogin.textContent = "Senha inválida!";
         } else {
-            erroLogin.textContent = "";
             window.location.href = "timeline.html"; 
         }
     });
 }
 
+const btnCrieConta = document.getElementById('btn-crie-conta');
 if (btnCrieConta) {
-    btnCrieConta.addEventListener('click', function() {
-        window.location.href = "cadastro1.html";
-    });
-}
-
-if (btnEsqueceuSenha) {
-    btnEsqueceuSenha.addEventListener('click', function() {
-        const email = inputEmail.value;
-        if (email === "") {
-            erroLogin.textContent = "Digite seu e-mail no campo acima para podermos ajudar.";
-        } else if (email.includes("@unirio.br") || email.includes("@edu.unirio.br")) {
-            const nomeUsuarioReal = email.split('@')[0];
-            alert(`Sucesso! Olá, ${nomeUsuarioReal}! Um e-mail de recuperação foi enviado para: ${email}`);
-            erroLogin.textContent = ""; 
-        } else {
-            erroLogin.textContent = "Insira um e-mail válido da UNIRIO.";
-        }
-    });
+    btnCrieConta.addEventListener('click', () => window.location.href = "cadastro1.html");
 }
 
 const btnProsseguir = document.getElementById('btn-prosseguir');
-const inputCadEmail = document.getElementById('cad-email');
-const inputCadSenha = document.getElementById('cad-senha');
-const inputConfirmaSenha = document.getElementById('cad-confirma-senha');
-const erroCadastro = document.getElementById('erro-cadastro');
-
 if (btnProsseguir) {
     btnProsseguir.addEventListener('click', function() {
-        const email = inputCadEmail.value;
-        const senha = inputCadSenha.value;
-        const confirmaSenha = inputConfirmaSenha.value;
-        erroCadastro.textContent = "";
+        const email = document.getElementById('cad-email').value;
+        const senha = document.getElementById('cad-senha').value;
+        const confirmaSenha = document.getElementById('cad-confirma-senha').value;
+        const erroCadastro = document.getElementById('erro-cadastro');
+        if (erroCadastro) erroCadastro.textContent = "";
+
         if (email === "" || senha === "" || confirmaSenha === "") {
-            erroCadastro.textContent = "Por favor, preencha todos os campos!";
+            if (erroCadastro) erroCadastro.textContent = "Por favor, preencha todos os campos!";
         } else if (!email.includes("@unirio.br") && !email.includes("@edu.unirio.br")) {
-            erroCadastro.textContent = "Use um e-mail institucional da UNIRIO.";
+            if (erroCadastro) erroCadastro.textContent = "Use um e-mail institucional da UNIRIO.";
         } else if (senha.length < 4) {
-            erroCadastro.textContent = "A senha deve ter pelo menos 4 caracteres.";
+            if (erroCadastro) erroCadastro.textContent = "A senha deve ter pelo menos 4 caracteres.";
         } else if (senha !== confirmaSenha) {
-            erroCadastro.textContent = "As senhas não coincidem!";
+            if (erroCadastro) erroCadastro.textContent = "As senhas não coincidem!";
         } else {
-            erroCadastro.textContent = "";
             window.location.href = "cadastro2.html";
         }
     });
 }
 
 const btnCriarConta = document.getElementById('btn-criar-conta');
-const inputCadNome = document.getElementById('cad-nome');
-const inputCadNascimento = document.getElementById('cad-nascimento');
-const inputCadCurso = document.getElementById('cad-curso');
-const erroDados = document.getElementById('erro-dados');
-
-if (inputCadNome) {
-    inputCadNome.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/[0-9]/g, '');
-    });
-}
-
-if (inputCadCurso) {
-    inputCadCurso.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/[0-9]/g, '');
-    });
-}
-
 if (btnCriarConta) {
     btnCriarConta.addEventListener('click', function() {
-        const nome = inputCadNome.value.trim();
-        const nascimento = inputCadNascimento.value.trim();
-        const curso = inputCadCurso.value.trim();
-        erroDados.textContent = "";
+        const nome = document.getElementById('cad-nome').value.trim();
+        const nascimento = document.getElementById('cad-nascimento').value.trim();
+        const curso = document.getElementById('cad-curso').value.trim();
+        const erroDados = document.getElementById('erro-dados');
+        if (erroDados) erroDados.textContent = "";
+
         if (nome === "" || nascimento === "" || curso === "") {
-            erroDados.textContent = "Por favor, preencha todos os seus dados pessoais!";
+            if (erroDados) erroDados.textContent = "Por favor, preencha todos os seus dados pessoais!";
             return;
         }
-        if (isNaN(Date.parse(nascimento))) {
-            erroDados.textContent = "Por favor, insira uma data válida.";
-            return;
-        }
+        
         const hoje = new Date();
         const dataNasc = new Date(nascimento);
         let idade = hoje.getFullYear() - dataNasc.getFullYear();
-        const m = hoje.getMonth() - dataNasc.getMonth();
-        if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {
-            idade--;
-        }
-        if (idade < 16 || idade > 100) {
-            erroDados.textContent = "Idade inválida para cadastro (Mínimo 16 anos).";
-            return;
-        }
         localStorage.setItem('unihub_nome', nome);
         localStorage.setItem('unihub_curso', curso);
         localStorage.setItem('unihub_idade', idade + " Anos");
-        erroDados.textContent = "";
         window.location.href = "timeline.html";
     });
 }
@@ -128,58 +76,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const idadeSalva = localStorage.getItem('unihub_idade') || "21 Anos";
     const bioSalva = localStorage.getItem('unihub_bio') || "Gosto de esportes calmos";
 
-    document.querySelectorAll('.nome-perfil-clicavel').forEach(el => {
-        el.textContent = nomeSalvo;
-    });
 
-    const elPerfilNome = document.querySelector('.profile-body h2');
-    if (elPerfilNome) elPerfilNome.textContent = nomeSalvo;
-
+    document.querySelectorAll('.nome-perfil-clicavel').forEach(el => el.textContent = nomeSalvo);
     const txtCurso = document.querySelector('.profile-body .course');
     if (txtCurso) txtCurso.textContent = cursoSalvo;
-
     const txtIdade = document.querySelector('.profile-body .age');
     if (txtIdade) txtIdade.textContent = idadeSalva;
-
     const txtBio = document.querySelector('.profile-body .bio');
     if (txtBio) txtBio.textContent = bioSalva;
 
-    const inputBusca = document.querySelector('.search-bar');
-    if (inputBusca) {
-        inputBusca.addEventListener('input', function() {
-            const termo = this.value.toLowerCase().trim();
-            document.querySelectorAll('.post-card, .event-card').forEach(card => {
-                const texto = card.textContent.toLowerCase();
-                if (texto.includes(termo)) {
-                    card.style.display = "";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        });
-    }
-
-    const btnSair = document.getElementById('btn-sair');
-    if (btnSair) {
-        btnSair.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm("Você tem certeza que deseja sair do UniHub?")) {
-                window.location.href = "index.html";
-            }
-        });
-    }
-
-    const cardPerfilAtalho = document.getElementById('card-perfil-atalho');
-    if (cardPerfilAtalho) {
-        cardPerfilAtalho.addEventListener('click', () => window.location.href = "perfil.html");
-    }
-
-    function aplicarCliquesDePerfil(container) {
-        container.querySelectorAll('.avatar-clicavel, .nome-perfil-clicavel').forEach(elemento => {
-            elemento.style.cursor = "pointer";
-            elemento.addEventListener('click', () => window.location.href = "perfil.html");
-        });
-    }
 
     const inputNovoPost = document.getElementById('input-novo-post');
     const feedContainer = document.getElementById('feed-container');
@@ -187,9 +92,10 @@ document.addEventListener("DOMContentLoaded", function() {
     if (inputNovoPost && feedContainer) {
         inputNovoPost.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                e.preventDefault(); 
-                if (inputNovoPost.value.trim() !== "") {
-                    const conteudoDoPost = inputNovoPost.value;
+                e.preventDefault();
+                const conteudoDoPost = inputNovoPost.value.trim();
+                
+                if (conteudoDoPost !== "") {
                     const novoPost = document.createElement('div');
                     novoPost.className = 'post-card';
                     novoPost.innerHTML = `
@@ -213,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     `;
                     feedContainer.insertBefore(novoPost, feedContainer.firstChild);
                     inputNovoPost.value = "";
+                    
                     adicionarInteratividadeAoPost(novoPost);
                     aplicarCliquesDePerfil(novoPost);
                 }
@@ -225,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const btnSalvar = postCard.querySelector('.btn-salvar');
         const btnRepublicar = postCard.querySelector('.btn-republicar'); 
         const inputComentario = postCard.querySelector('.input-comentario');
-        const listaComentarios = postCard.querySelector('.comments-list') || postCard.querySelector('.post-comments');
+        const listaComentarios = postCard.querySelector('.post-comments');
 
         if (btnCurtir) {
             btnCurtir.addEventListener('click', function() {
@@ -257,30 +164,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (btnRepublicar) {
             btnRepublicar.addEventListener('click', function() {
-                this.classList.toggle('ativo');
-                if (this.classList.contains('ativo')) {
-                    this.style.color = "#28a745"; 
-                    const fContainer = document.getElementById('feed-container');
-                    if (fContainer) {
-                        const postClonado = postCard.cloneNode(true);
-                        const btnRepublicarClone = postClonado.querySelector('.btn-republicar');
-                        if (btnRepublicarClone) {
-                            btnRepublicarClone.classList.remove('ativo');
-                            btnRepublicarClone.style.color = "#666";
-                        }
-                        const inputComentarioClone = postClonado.querySelector('.input-comentario');
-                        if (inputComentarioClone) inputComentarioClone.value = '';
-                        const listaComentariosClone = postClonado.querySelector('.comments-list') || postClonado.querySelector('.post-comments');
-                        if (listaComentariosClone) listaComentariosClone.innerHTML = '';
-                        const postInfoTexto = postClonado.querySelector('.post-info span');
-                        if (postInfoTexto) postInfoTexto.textContent = "Republicou esta atividade • Agora mesmo";
-                        
-                        fContainer.insertBefore(postClonado, fContainer.firstChild);
-                        adicionarInteratividadeAoPost(postClonado);
-                        aplicarCliquesDePerfil(postClonado);
+                this.style.color = "#28a745";
+                
+                if (feedContainer) {
+                    const postClonado = postCard.cloneNode(true);
+                    
+                    const btnRepublicarClone = postClonado.querySelector('.btn-republicar');
+                    if (btnRepublicarClone) {
+                        btnRepublicarClone.style.color = "#666";
+                        btnRepublicarClone.classList.remove('ativo');
                     }
-                } else {
-                    this.style.color = "#666";
+
+                    const inputComentarioClone = postClonado.querySelector('.input-comentario');
+                    if (inputComentarioClone) inputComentarioClone.value = '';
+                    
+                    const listaComentariosClone = postClonado.querySelector('.post-comments');
+                    if (listaComentariosClone) listaComentariosClone.innerHTML = '';
+                    
+                    const postInfoTexto = postClonado.querySelector('.post-info span');
+                    if (postInfoTexto) {
+                        postInfoTexto.textContent = "Republicou esta atividade • Agora mesmo";
+                    }
+
+                    feedContainer.insertBefore(postClonado, feedContainer.firstChild);
+                    
+                    adicionarInteratividadeAoPost(postClonado);
+                    aplicarCliquesDePerfil(postClonado);
                 }
             });
         }
@@ -288,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (inputComentario && listaComentarios) {
             inputComentario.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' && this.value.trim() !== "") {
+                    e.preventDefault();
                     const texto = this.value.trim();
                     const item = document.createElement('div');
                     item.className = 'comment-item';
@@ -302,128 +212,43 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    function aplicarCliquesDePerfil(container) {
+        container.querySelectorAll('.avatar-clicavel, .nome-perfil-clicavel').forEach(elemento => {
+            elemento.style.cursor = "pointer";
+            elemento.addEventListener('click', () => window.location.href = "perfil.html");
+        });
+    }
+
     document.querySelectorAll('.post-card').forEach(post => {
         adicionarInteratividadeAoPost(post);
         aplicarCliquesDePerfil(post);
     });
-
-    const botoesAcao = document.querySelectorAll('.action-btn');
-    const hiddenPhotoInput = document.getElementById('hidden-photo-input');
-    const hiddenVideoInput = document.getElementById('hidden-video-input');
-    const hiddenDateInput = document.getElementById('hidden-date-input');
-
-    botoesAcao.forEach(botao => {
-        botao.style.cursor = "pointer";
-        botao.addEventListener('click', function() {
-            const textoBotao = this.textContent.trim();
-            if (textoBotao.includes("Foto") && hiddenPhotoInput) {
-                hiddenPhotoInput.click();
-            } else if (textoBotao.includes("Vídeo") && hiddenVideoInput) {
-                hiddenVideoInput.click();
-            } else if (textoBotao.includes("Data") && hiddenDateInput) {
-                hiddenDateInput.showPicker();
-            } else if (textoBotao.includes("Câmera")) {
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(function(stream) {
-                            alert("Permissão concedida! Câmera conectada com sucesso.");
-                            stream.getTracks().forEach(track => track.stop());
-                        })
-                        .catch(function() {
-                            alert("Acesso à câmera negado ou dispositivo não encontrado.");
-                        });
-                }
-            }
-        });
-    });
-
-    if (hiddenPhotoInput) {
-        hiddenPhotoInput.addEventListener('change', function() {
-            if (this.files.length > 0 && inputNovoPost) {
-                const nomes = Array.from(this.files).map(f => f.name).join(', ');
-                inputNovoPost.value += ` [Imagens: ${nomes}]`;
-            }
+    
+    const inputBusca = document.querySelector('.search-bar');
+    if (inputBusca) {
+        inputBusca.addEventListener('input', function() {
+            const termo = this.value.toLowerCase().trim();
+            document.querySelectorAll('.post-card').forEach(card => {
+                const texto = card.textContent.toLowerCase();
+                card.style.display = texto.includes(termo) ? "" : "none";
+            });
         });
     }
 
-    if (hiddenVideoInput) {
-        hiddenVideoInput.addEventListener('change', function() {
-            if (this.files.length > 0 && inputNovoPost) {
-                inputNovoPost.value += ` [Vídeo: ${this.files[0].name}]`;
-            }
-        });
-    }
-
-    if (hiddenDateInput) {
-        hiddenDateInput.addEventListener('change', function() {
-            if (this.value && inputNovoPost) {
-                const dataFormatada = this.value.split('-').reverse().join('/');
-                inputNovoPost.value += ` [Evento: ${dataFormatada}]`;
-            }
+    const btnSair = document.getElementById('btn-sair');
+    if (btnSair) {
+        btnSair.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm("Você tem certeza que deseja sair do UniHub?")) window.location.href = "index.html";
         });
     }
 
     const btnConfirmar = document.getElementById('btn-confirmar-presenca');
     if (btnConfirmar) {
         btnConfirmar.addEventListener('click', function() {
-            if (this.textContent === "Confirmar presença") {
-                this.textContent = "✓ Presença Confirmada!";
-                this.style.backgroundColor = "#28a745";
-                this.style.color = "#fff";
-            } else {
-                this.textContent = "Confirmar presença";
-                this.style.backgroundColor = "";
-                this.style.color = "";
-            }
-        });
-    }
-
-    const inputEditNome = document.getElementById('edit-nome');
-    const inputEditCurso = document.getElementById('edit-curso');
-    const inputEditIdade = document.getElementById('edit-idade');
-    const inputEditBio = document.getElementById('edit-bio');
-    const formEditarPerfil = document.getElementById('edit-profile-form');
-
-    if(inputEditNome && nomeSalvo) inputEditNome.value = nomeSalvo;
-    if(inputEditCurso && cursoSalvo) inputEditCurso.value = cursoSalvo;
-    if(inputEditIdade && idadeSalva) inputEditIdade.value = parseInt(idadeSalva) || "";
-    if(inputEditBio && bioSalva) inputEditBio.value = bioSalva;
-
-    if (inputEditNome) {
-        inputEditNome.addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/[0-9]/g, '');
-        });
-    }
-    if (inputEditCurso) {
-        inputEditCurso.addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/[0-9]/g, '');
-        });
-    }
-
-    if (formEditarPerfil) {
-        formEditarPerfil.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nomeVal = inputEditNome.value.trim();
-            const cursoVal = inputEditCurso.value.trim();
-            const idadeVal = inputEditIdade ? parseInt(inputEditIdade.value.trim()) : "";
-            const bioVal = inputEditBio ? inputEditBio.value.trim() : "";
-
-            if(nomeVal === "" || cursoVal === "") {
-                alert("Os campos Nome e Curso não podem ficar vazios.");
-                return;
-            }
-            if(inputEditIdade && (isNaN(idadeVal) || idadeVal < 16 || idadeVal > 100)) {
-                alert("Insira uma idade válida (Mínimo 16 anos).");
-                return;
-            }
-
-            localStorage.setItem('unihub_nome', nomeVal);
-            localStorage.setItem('unihub_curso', cursoVal);
-            if(idadeVal) localStorage.setItem('unihub_idade', idadeVal + " Anos");
-            localStorage.setItem('unihub_bio', bioVal);
-
-            alert("Alterações salvas com sucesso!");
-            window.location.href = "perfil.html"; 
+            this.textContent = "✓ Presença Confirmada!";
+            this.style.backgroundColor = "#28a745";
+            this.style.color = "#fff";
         });
     }
 });
