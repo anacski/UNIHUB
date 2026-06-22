@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     
                     const btnRepublicarClone = postClonado.querySelector('.btn-republicar');
                     if (btnRepublicarClone) {
-                        btnRepublicarClone.style.color = "#666";
+                        btnRepublicarClone.style.color = "";
                         btnRepublicarClone.classList.remove('ativo');
                     }
 
@@ -160,8 +160,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     const texto = this.value.trim();
                     const item = document.createElement('div');
                     item.className = 'comment-item';
-                    item.style.padding = "6px 10px";
-                    item.style.borderTop = "1px solid #eee";
+                    item.style.padding = "8px 12px";
+                    item.style.marginTop = "8px";
+                    item.style.backgroundColor = "#f0f2f5";
+                    item.style.borderRadius = "15px";
                     item.style.fontSize = "0.9rem";
                     item.innerHTML = `<strong>${nomeSalvo}:</strong> ${texto}`;
                     listaComentarios.appendChild(item);
@@ -213,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    /* === INJEÇÃO DO EVENTO CRIADO NO FORMULÁRIO COM O BOTÃO DE PRESENÇA === */
     const eventoPendente = localStorage.getItem('unihub_novo_evento');
     if (eventoPendente && feedContainer) {
         const dados = JSON.parse(eventoPendente);
@@ -223,23 +226,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
                 <div class="post-info">
                     <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
-                    <span>Organizou uma nova atividade • Agora mesmo</span>
+                    <span>Criou um evento • Agora mesmo</span>
                 </div>
             </div>
-            <div class="post-content" style="padding: 10px 0;">
-                <h3 style="margin: 0 0 8px 0; color: #333;">${dados.titulo}</h3>
-                <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #555;">${dados.descricao}</p>
-                <div style="font-size: 0.85rem; color: #666; display: flex; flex-direction: column; gap: 4px; background: #f5f5f5; padding: 10px; border-radius: 6px;">
-                    <span><i class="fa-solid fa-location-dot" style="width: 16px; color: #777;"></i> <strong>Local:</strong> ${dados.local}</span>
-                    <span><i class="fa-regular fa-calendar-days" style="width: 16px; color: #777;"></i> <strong>Data e Hora:</strong> ${dados.data}</span>
+            <div class="post-content">
+                <h3 style="margin-top: 5px; margin-bottom: 8px;">${dados.titulo}</h3>
+                <p>${dados.descricao}</p>
+                <div class="event-box" style="background-color: #f0f2f5; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0 0 8px 0; color: #050505;"><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #65676b;"></i><strong>${dados.local}</strong></p>
+                    <p style="margin: 0; color: #050505;"><i class="fa-regular fa-calendar-days" style="margin-right: 8px; color: #65676b;"></i><strong>${dados.data}</strong></p>
+                    <button class="btn-confirmar-presenca-dinamico" style="margin-top: 15px; width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: background-color 0.2s;"><i class="fa-regular fa-calendar-check" style="margin-right: 5px;"></i> Confirmar Presença</button>
                 </div>
             </div>
-            <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
-            <div class="post-footer" style="display:flex; align-items:center; gap:10px;">
-                <button class="interactive-icon btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #666; font-size: 1.2rem;"><i class="fa-solid fa-retweet"></i></button>
-                <button class="interactive-icon btn-curtir" title="Curtir" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-heart"></i></button>
-                <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:4px;">
-                <button class="interactive-icon btn-salvar" title="Salvar" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-bookmark"></i></button>
+            <div class="post-comments"></div>
+            <div class="post-footer" style="border-top: 1px solid #ced0d4; padding-top: 10px; margin-top: 15px; display: flex; justify-content: space-between;">
+                <button class="action-btn btn-curtir" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-heart"></i> Curtir</button>
+                <button class="action-btn btn-comentar" onclick="this.parentElement.nextElementSibling.querySelector('input').focus()" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-comment"></i> Comentar</button>
+                <button class="action-btn btn-republicar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-solid fa-retweet"></i> Republicar</button>
+                <button class="action-btn btn-salvar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-bookmark"></i> Salvar</button>
+            </div>
+            <div class="comment-input-area" style="display: flex; gap: 10px; margin-top: 10px; padding-top: 10px;">
+                <img src="images/avatar-jorge.png" class="avatar-small" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
+                <input type="text" class="input-comentario" placeholder="Escreva um comentário..." style="flex: 1; border-radius: 20px; border: 1px solid #ced0d4; padding: 8px 15px; background: #f0f2f5; outline: none;">
             </div>
         `;
         feedContainer.insertBefore(cardEvento, feedContainer.firstChild);
@@ -247,8 +255,20 @@ document.addEventListener("DOMContentLoaded", function() {
         
         adicionarInteratividadeAoPost(cardEvento);
         aplicarCliquesDePerfil(cardEvento);
+
+        // Adiciona o comportamento de clique no novo botão de confirmar presença
+        const btnNovoConfirmar = cardEvento.querySelector('.btn-confirmar-presenca-dinamico');
+        if (btnNovoConfirmar) {
+            btnNovoConfirmar.addEventListener('click', function() {
+                this.innerHTML = "✓ Presença Confirmada!";
+                this.style.backgroundColor = "#218838"; 
+                this.style.color = "#fff";
+                this.style.border = "none";
+            });
+        }
     }
 
+    /* === INJEÇÃO DO POST RÁPIDO COM ESTILO PADRONIZADO === */
     if (inputNovoPost && feedContainer) {
         inputNovoPost.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -263,18 +283,22 @@ document.addEventListener("DOMContentLoaded", function() {
                             <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
                             <div class="post-info">
                                 <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
-                                <span>Postou uma nova atividade • Agora mesmo</span>
+                                <span>Publicou algo • Agora mesmo</span>
                             </div>
                         </div>
-                        <div class="post-content" style="padding: 10px 0;">
-                            ${conteudoDoPost}
+                        <div class="post-content" style="margin-top: 10px;">
+                            <p>${conteudoDoPost}</p>
                         </div>
-                        <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
-                        <div class="post-footer" style="display:flex; align-items:center; gap:10px;">
-                            <button class="interactive-icon btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #666; font-size: 1.2rem;"><i class="fa-solid fa-retweet"></i></button>
-                            <button class="interactive-icon btn-curtir" title="Curtir" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-heart"></i></button>
-                            <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:4px;">
-                            <button class="interactive-icon btn-salvar" title="Salvar" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-bookmark"></i></button>
+                        <div class="post-comments"></div>
+                        <div class="post-footer" style="border-top: 1px solid #ced0d4; padding-top: 10px; margin-top: 15px; display: flex; justify-content: space-between;">
+                            <button class="action-btn btn-curtir" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-heart"></i> Curtir</button>
+                            <button class="action-btn btn-comentar" onclick="this.parentElement.nextElementSibling.querySelector('input').focus()" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-comment"></i> Comentar</button>
+                            <button class="action-btn btn-republicar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-solid fa-retweet"></i> Republicar</button>
+                            <button class="action-btn btn-salvar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-bookmark"></i> Salvar</button>
+                        </div>
+                        <div class="comment-input-area" style="display: flex; gap: 10px; margin-top: 10px; padding-top: 10px;">
+                            <img src="images/avatar-jorge.png" class="avatar-small" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
+                            <input type="text" class="input-comentario" placeholder="Escreva um comentário..." style="flex: 1; border-radius: 20px; border: 1px solid #ced0d4; padding: 8px 15px; background: #f0f2f5; outline: none;">
                         </div>
                     `;
                     feedContainer.insertBefore(novoPost, feedContainer.firstChild);
@@ -389,12 +413,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Mantive isso para eventos originais que já vieram no HTML
     const btnConfirmar = document.getElementById('btn-confirmar-presenca');
     if (btnConfirmar) {
         btnConfirmar.addEventListener('click', function() {
             this.textContent = "✓ Presença Confirmada!";
             this.style.backgroundColor = "#28a745";
             this.style.color = "#fff";
+            this.style.border = "none";
         });
     }
 });
