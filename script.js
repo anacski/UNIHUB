@@ -329,3 +329,33 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+const btnClip = document.getElementById('btn-clip-attach');
+const hiddenFileChat = document.getElementById('chat-hidden-file');
+const inputChat = document.getElementById('chat-input-field');
+
+if (btnClip && hiddenFileChat) {
+    btnClip.addEventListener('click', () => hiddenFileChat.click());
+    
+    hiddenFileChat.addEventListener('change', function() {
+        if (this.files.length > 0 && inputChat) {
+            inputChat.value += ` [Arquivo: ${this.files[0].name}]`;
+        }
+    });
+}
+
+document.querySelectorAll('.chat-item').forEach(item => {
+    item.addEventListener('click', function() {
+        document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        
+        const nomeGrupo = this.querySelector('.chat-info h4').textContent;
+        const srcAvatar = this.querySelector('.chat-avatar').src;
+        
+        const headerNome = document.getElementById('header-nome');
+        const headerAvatar = document.getElementById('header-avatar');
+        
+        if (headerNome) headerNome.textContent = nomeGrupo;
+        if (headerAvatar) headerAvatar.src = srcAvatar;
+    });
+});
