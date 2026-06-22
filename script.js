@@ -75,18 +75,108 @@ document.addEventListener("DOMContentLoaded", function() {
     const cursoSalvo = localStorage.getItem('unihub_curso') || "CCH - Pedagogia";
     const idadeSalva = localStorage.getItem('unihub_idade') || "21 Anos";
     const bioSalva = localStorage.getItem('unihub_bio') || "Gosto de esportes calmos";
+    const avatarSalvo = localStorage.getItem('unihub_avatar') || "images/avatar-jorge.png";
+    const capaSalva = localStorage.getItem('unihub_capa') || "";
 
     document.querySelectorAll('.nome-perfil-clicavel').forEach(el => el.textContent = nomeSalvo);
+    
+    const h2Perfil = document.querySelector('.profile-body h2');
+    if (h2Perfil) h2Perfil.textContent = nomeSalvo;
+
     const txtCurso = document.querySelector('.profile-body .course');
     if (txtCurso) txtCurso.textContent = cursoSalvo;
+    
     const txtIdade = document.querySelector('.profile-body .age');
     if (txtIdade) txtIdade.textContent = idadeSalva;
+    
     const txtBio = document.querySelector('.profile-body .bio');
     if (txtBio) txtBio.textContent = bioSalva;
+
+    document.querySelectorAll('.avatar-large').forEach(img => img.src = avatarSalvo);
+    
+    document.querySelectorAll('.profile-header').forEach(header => {
+        if (capaSalva) {
+            header.style.backgroundImage = `url(${capaSalva})`;
+            header.style.backgroundSize = "cover";
+            header.style.backgroundPosition = "center";
+        }
+    });
 
     const cardPerfilAtalho = document.getElementById('card-perfil-atalho');
     if (cardPerfilAtalho) {
         cardPerfilAtalho.addEventListener('click', () => window.location.href = "perfil.html");
+    }
+
+    const formEditarPerfil = document.getElementById('form-editar-perfil');
+    if (formEditarPerfil) {
+        const inputNome = document.getElementById('edit-nome');
+        const inputCurso = document.getElementById('edit-curso');
+        const inputIdade = document.getElementById('edit-idade');
+        const inputBio = document.getElementById('edit-bio');
+        const fileCapa = document.getElementById('file-capa');
+        const fileAvatar = document.getElementById('file-avatar');
+        
+        const previewCapa = document.querySelector('.edit-header-preview');
+        const previewAvatar = document.querySelector('.edit-avatar-preview');
+
+        if(inputNome) inputNome.value = nomeSalvo;
+        if(inputCurso) inputCurso.value = cursoSalvo;
+        if(inputIdade) inputIdade.value = idadeSalva.replace(" Anos", "").trim();
+        if(inputBio) inputBio.value = bioSalva;
+        if(previewAvatar) previewAvatar.src = avatarSalvo;
+        if(previewCapa && capaSalva) {
+            previewCapa.style.backgroundImage = `url(${capaSalva})`;
+            previewCapa.style.backgroundSize = "cover";
+            previewCapa.style.backgroundPosition = "center";
+        }
+
+        let base64Avatar = avatarSalvo;
+        let base64Capa = capaSalva;
+
+        if (fileAvatar) {
+            fileAvatar.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        base64Avatar = e.target.result;
+                        if (previewAvatar) previewAvatar.src = base64Avatar;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        if (fileCapa) {
+            fileCapa.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        base64Capa = e.target.result;
+                        if (previewCapa) {
+                            previewCapa.style.backgroundImage = `url(${base64Capa})`;
+                            previewCapa.style.backgroundSize = "cover";
+                            previewCapa.style.backgroundPosition = "center";
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        formEditarPerfil.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            localStorage.setItem('unihub_nome', inputNome.value.trim());
+            localStorage.setItem('unihub_curso', inputCurso.value.trim());
+            localStorage.setItem('unihub_idade', inputIdade.value.trim() + " Anos");
+            localStorage.setItem('unihub_bio', inputBio.value.trim());
+            localStorage.setItem('unihub_avatar', base64Avatar);
+            localStorage.setItem('unihub_capa', base64Capa);
+
+            window.location.href = "perfil.html";
+        });
     }
 
     const inputNovoPost = document.getElementById('input-novo-post');
@@ -130,16 +220,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (btnRepublicar) {
             btnRepublicar.addEventListener('click', function() {
                 this.style.color = "#28a745";
-                
                 if (feedContainer) {
                     const postClonado = postCard.cloneNode(true);
-                    
                     const btnRepublicarClone = postClonado.querySelector('.btn-republicar');
                     if (btnRepublicarClone) {
                         btnRepublicarClone.style.color = "";
                         btnRepublicarClone.classList.remove('ativo');
                     }
-
                     const inputComentarioClone = postClonado.querySelector('.input-comentario');
                     if (inputComentarioClone) inputComentarioClone.value = '';
                     
@@ -147,9 +234,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (listaComentariosClone) listaComentariosClone.innerHTML = '';
                     
                     const postInfoTexto = postClonado.querySelector('.post-info span');
-                    if (postInfoTexto) {
-                        postInfoTexto.textContent = "Republicou esta atividade • Agora mesmo";
-                    }
+                    if (postInfoTexto) postInfoTexto.textContent = "Republicou esta atividade • Agora mesmo";
 
                     feedContainer.insertBefore(postClonado, feedContainer.firstChild);
                     adicionarInteratividadeAoPost(postClonado);
@@ -189,7 +274,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (formEvento) {
         formEvento.addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const inputNome = document.getElementById('event-name');
             const inputLocal = document.getElementById('event-location');
             const inputData = document.getElementById('event-date');
@@ -227,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function() {
         cardEvento.className = 'post-card';
         cardEvento.innerHTML = `
             <div class="post-header">
-                <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Jorge Filho">
+                <img src="${avatarSalvo}" class="avatar-small avatar-clicavel" alt="Avatar">
                 <div class="post-info">
                     <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
                     <span>Postou um novo evento • Agora mesmo</span>
@@ -248,7 +332,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button class="interactive-icon btn-salvar" title="Salvar"><i class="fa-regular fa-bookmark"></i></button>
             </div>
         `;
-        
         feedContainer.insertBefore(cardEvento, feedContainer.children[1]);
         localStorage.removeItem('unihub_novo_evento');
         
@@ -271,13 +354,12 @@ document.addEventListener("DOMContentLoaded", function() {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 const conteudoDoPost = inputNovoPost.value.trim();
-                
                 if (conteudoDoPost !== "") {
                     const novoPost = document.createElement('div');
                     novoPost.className = 'post-card';
                     novoPost.innerHTML = `
                         <div class="post-header">
-                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Jorge Filho">
+                            <img src="${avatarSalvo}" class="avatar-small avatar-clicavel" alt="Avatar">
                             <div class="post-info">
                                 <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
                                 <span>Postou uma nova atividade • Agora mesmo</span>
@@ -294,10 +376,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             <button class="interactive-icon btn-salvar" title="Salvar"><i class="fa-regular fa-bookmark"></i></button>
                         </div>
                     `;
-                    
                     feedContainer.insertBefore(novoPost, feedContainer.children[1]);
                     inputNovoPost.value = "";
-                    
                     adicionarInteratividadeAoPost(novoPost);
                     aplicarCliquesDePerfil(novoPost);
                 }
@@ -319,27 +399,18 @@ document.addEventListener("DOMContentLoaded", function() {
         botao.style.cursor = "pointer";
         botao.addEventListener('click', function() {
             const textoBotao = this.textContent.trim();
-            
-            if (textoBotao.includes("Foto") && hiddenPhotoInput) {
-                hiddenPhotoInput.click();
-            } else if (textoBotao.includes("Vídeo") && hiddenVideoInput) {
-                hiddenVideoInput.click();
-            } else if (textoBotao.includes("Data") && hiddenDateInput) {
-                if (typeof hiddenDateInput.showPicker === 'function') {
-                    hiddenDateInput.showPicker();
-                } else {
-                    hiddenDateInput.click();
-                }
+            if (textoBotao.includes("Foto") && hiddenPhotoInput) hiddenPhotoInput.click();
+            else if (textoBotao.includes("Vídeo") && hiddenVideoInput) hiddenVideoInput.click();
+            else if (textoBotao.includes("Data") && hiddenDateInput) {
+                if (typeof hiddenDateInput.showPicker === 'function') hiddenDateInput.showPicker();
+                else hiddenDateInput.click();
             } else if (textoBotao.includes("Câmera")) {
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(function(stream) {
+                        .then(stream => {
                             alert("Permissão concedida! Câmera conectada com sucesso.");
                             stream.getTracks().forEach(track => track.stop());
-                        })
-                        .catch(function() {
-                            alert("Acesso à câmera negado ou dispositivo não encontrado.");
-                        });
+                        }).catch(() => alert("Acesso à câmera negado ou dispositivo não encontrado."));
                 }
             }
         });
@@ -356,9 +427,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (hiddenVideoInput) {
         hiddenVideoInput.addEventListener('change', function() {
-            if (this.files.length > 0 && inputNovoPost) {
-                inputNovoPost.value += ` [Vídeo: ${this.files[0].name}]`;
-            }
+            if (this.files.length > 0 && inputNovoPost) inputNovoPost.value += ` [Vídeo: ${this.files[0].name}]`;
         });
     }
 
@@ -373,7 +442,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const inputBusca = document.getElementById('search-bar');
     const msgSemResultados = document.getElementById('sem-resultados');
-
     if (inputBusca) {
         inputBusca.addEventListener('input', function() {
             const termo = this.value.toLowerCase().trim();
@@ -381,9 +449,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let encontrouAlgo = false;
 
             cards.forEach(card => {
-                const textoCard = card.textContent.toLowerCase();
-
-                if (textoCard.includes(termo)) {
+                if (card.textContent.toLowerCase().includes(termo)) {
                     card.style.display = ""; 
                     encontrouAlgo = true;
                 } else {
@@ -391,11 +457,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            if (!encontrouAlgo && termo !== "") {
-                if (msgSemResultados) msgSemResultados.style.display = "block";
-            } else {
-                if (msgSemResultados) msgSemResultados.style.display = "none";
-            }
+            if (msgSemResultados) msgSemResultados.style.display = (!encontrouAlgo && termo !== "") ? "block" : "none";
         });
     }
 
@@ -425,35 +487,15 @@ const btnEnviarMsg = document.getElementById('btn-send-message');
 const containerMensagens = document.getElementById('chat-messages-container');
 
 let grupoAtivo = "Basquete";
-
 const historicoChats = {
-    "Xadrezin": [
-        { tipo: "left", texto: "E aí, vai rolar o treino no DA?" },
-        { tipo: "left", texto: "sábado não tem..." }
-    ],
-    "Basquete": [
-        { tipo: "right", texto: "Vai ter jogo sábado?" },
-        { tipo: "left", texto: "15h no aterro" },
-        { tipo: "right", texto: "👍" },
-        { tipo: "left", html: '<img src="images/jogo-basquete.jpeg" class="media-preview" alt="Mídia">' }
-    ],
-    "Vôlei": [
-        { tipo: "left", texto: "Quem vai levar a bola na sexta?" },
-        { tipo: "right", texto: "Eu levo!" },
-        { tipo: "left", texto: "boaaa!!!" }
-    ],
-    "Ping pong": [
-        { tipo: "right", texto: "Perdi a raquete de novo kkkk" },
-        { tipo: "left", texto: "KKKKKKKKK" }
-    ]
+    "Xadrezin": [{ tipo: "left", texto: "E aí, vai rolar o treino no DA?" }, { tipo: "left", texto: "sábado não tem..." }],
+    "Basquete": [{ tipo: "right", texto: "Vai ter jogo sábado?" }, { tipo: "left", texto: "15h no aterro" }, { tipo: "right", texto: "👍" }, { tipo: "left", html: '<img src="images/jogo-basquete.jpeg" class="media-preview" alt="Mídia">' }],
+    "Vôlei": [{ tipo: "left", texto: "Quem vai levar a bola na sexta?" }, { tipo: "right", texto: "Eu levo!" }, { tipo: "left", texto: "boaaa!!!" }],
+    "Ping pong": [{ tipo: "right", texto: "Perdi a raquete de novo kkkk" }, { tipo: "left", texto: "KKKKKKKKK" }]
 };
 
 if (btnClip && hiddenFileChat) {
-    btnClip.addEventListener('click', function(e) {
-        e.preventDefault();
-        hiddenFileChat.click();
-    });
-    
+    btnClip.addEventListener('click', e => { e.preventDefault(); hiddenFileChat.click(); });
     hiddenFileChat.addEventListener('change', function() {
         if (this.files.length > 0 && inputChat) {
             inputChat.value += ` [Arquivo: ${this.files[0].name}]`;
@@ -465,26 +507,18 @@ if (btnClip && hiddenFileChat) {
 function renderizarMensagens(nomeGrupo) {
     if (!containerMensagens) return;
     containerMensagens.innerHTML = "";
-    
-    const mensagens = historicoChats[nomeGrupo] || [];
-    mensagens.forEach(msg => {
+    (historicoChats[nomeGrupo] || []).forEach(msg => {
         const msgDiv = document.createElement('div');
         msgDiv.className = `message ${msg.tipo}`;
-        
-        const corBolha = msg.tipo === "right" ? "blue" : "yellow";
-        const conteudo = msg.html ? msg.html : `<div class="bubble ${corBolha}">${msg.texto}</div>`;
-        
-        msgDiv.innerHTML = conteudo;
+        msgDiv.innerHTML = msg.html ? msg.html : `<div class="bubble ${msg.tipo === "right" ? "blue" : "yellow"}">${msg.texto}</div>`;
         containerMensagens.appendChild(msgDiv);
     });
-    
     containerMensagens.scrollTop = containerMensagens.scrollHeight;
 }
 
 function atualizarPreviaGrupo(nomeGrupo, texto) {
     document.querySelectorAll('.chat-item').forEach(item => {
-        const titulo = item.querySelector('.chat-info h4').textContent;
-        if (titulo === nomeGrupo || (nomeGrupo === "Vôlei" && titulo.includes("Vôlei"))) {
+        if (item.querySelector('.chat-info h4').textContent.includes(nomeGrupo)) {
             const p = item.querySelector('.chat-info p');
             if (p) p.textContent = texto;
         }
@@ -495,40 +529,21 @@ function enviarMensagemChat() {
     if (!inputChat || !containerMensagens) return;
     const textoMensagem = inputChat.value.trim();
     if (textoMensagem !== "") {
-        if (!historicoChats[grupoAtivo]) {
-            historicoChats[grupoAtivo] = [];
-        }
-        
+        if (!historicoChats[grupoAtivo]) historicoChats[grupoAtivo] = [];
         historicoChats[grupoAtivo].push({ tipo: "right", texto: textoMensagem });
-        
         renderizarMensagens(grupoAtivo);
         atualizarPreviaGrupo(grupoAtivo, textoMensagem);
-        
         inputChat.value = "";
     }
 }
 
-if (btnEnviarMsg) {
-    btnEnviarMsg.addEventListener('click', function(e) {
-        e.preventDefault();
-        enviarMensagemChat();
-    });
-}
-
-if (inputChat) {
-    inputChat.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            enviarMensagemChat();
-        }
-    });
-}
+if (btnEnviarMsg) btnEnviarMsg.addEventListener('click', e => { e.preventDefault(); enviarMensagemChat(); });
+if (inputChat) inputChat.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); enviarMensagemChat(); } });
 
 document.querySelectorAll('.chat-item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
-        
         const h4Texto = this.querySelector('.chat-info h4').textContent;
         
         if (h4Texto.includes("Xadrezin")) grupoAtivo = "Xadrezin";
@@ -537,13 +552,9 @@ document.querySelectorAll('.chat-item').forEach(item => {
         else if (h4Texto.includes("Ping pong")) grupoAtivo = "Ping pong";
         
         const srcAvatar = this.querySelector('.chat-avatar').src;
-        const headerNome = document.getElementById('header-nome');
-        const headerAvatar = document.getElementById('header-avatar');
-        
-        if (headerNome) headerNome.textContent = h4Texto;
-        if (headerAvatar) headerAvatar.src = srcAvatar;
+        if (document.getElementById('header-nome')) document.getElementById('header-nome').textContent = h4Texto;
+        if (document.getElementById('header-avatar')) document.getElementById('header-avatar').src = srcAvatar;
         if (inputChat) inputChat.value = "";
-        
         renderizarMensagens(grupoAtivo);
     });
 });
