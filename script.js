@@ -335,6 +335,30 @@ const inputChat = document.getElementById('chat-input-field');
 const btnEnviarMsg = document.getElementById('btn-send-message');
 const containerMensagens = document.getElementById('chat-messages-container');
 
+let grupoAtivo = "Basquete";
+
+const historicoChats = {
+    "Xadrezin": [
+        { tipo: "left", texto: "E aí, vai rolar o treino no DA?" },
+        { tipo: "left", texto: "sábado não tem..." }
+    ],
+    "Basquete": [
+        { tipo: "right", texto: "Vai ter jogo sábado?" },
+        { tipo: "left", texto: "15h no aterro" },
+        { tipo: "right", texto: "👍" },
+        { tipo: "left", html: '<img src="images/jogo-basquete.jpeg" class="media-preview" alt="Mídia">' }
+    ],
+    "Vôlei": [
+        { tipo: "left", texto: "Quem vai levar a bola na sexta?" },
+        { tipo: "right", texto: "Eu levo!" },
+        { tipo: "left", texto: "boaaa!!!" }
+    ],
+    "Ping pong": [
+        { tipo: "right", texto: "Perdi a raquete de novo kkkk" },
+        { tipo: "left", texto: "KKKKKKKKK" }
+    ]
+};
+
 if (btnClip && hiddenFileChat) {
     btnClip.addEventListener('click', function(e) {
         e.preventDefault();
@@ -349,16 +373,49 @@ if (btnClip && hiddenFileChat) {
     });
 }
 
+function renderizarMensagens(nomeGrupo) {
+    if (!containerMensagens) return;
+    containerMensagens.innerHTML = "";
+    
+    const mensagens = historicoChats[nomeGrupo] || [];
+    mensagens.forEach(msg => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${msg.tipo}`;
+        
+        const corBolha = msg.tipo === "right" ? "blue" : "yellow";
+        const conteudo = msg.html ? msg.html : `<div class="bubble ${corBolha}">${msg.texto}</div>`;
+        
+        msgDiv.innerHTML = conteudo;
+        containerMensagens.appendChild(msgDiv);
+    });
+    
+    containerMensagens.scrollTop = containerMensagens.scrollHeight;
+}
+
+function atualizarPreviaGrupo(nomeGrupo, texto) {
+    document.querySelectorAll('.chat-item').forEach(item => {
+        const titulo = item.querySelector('.chat-info h4').textContent;
+        if (titulo === nomeGrupo || (nomeGrupo === "Vôlei" && titulo.includes("Vôlei"))) {
+            const p = item.querySelector('.chat-info p');
+            if (p) p.textContent = texto;
+        }
+    });
+}
+
 function enviarMensagemChat() {
     if (!inputChat || !containerMensagens) return;
     const textoMensagem = inputChat.value.trim();
     if (textoMensagem !== "") {
-        const novaMsgDiv = document.createElement('div');
-        novaMsgDiv.className = 'message right';
-        novaMsgDiv.innerHTML = `<div class="bubble blue">${textoMensagem}</div>`;
-        containerMensagens.appendChild(novaMsgDiv);
+        if (!historicoChats[grupoAtivo]) {
+            historicoChats[grupoAtivo] = [];
+        }
+        
+        historicoChats[grupoAtivo].push({ tipo: "right", texto: textoMensagem });
+        
+        renderizarMensagens(grupoAtivo);
+        atualizarPreviaGrupo(grupoAtivo, textoMensagem);
+        
         inputChat.value = "";
-        containerMensagens.scrollTop = containerMensagens.scrollHeight;
     }
 }
 
@@ -383,14 +440,21 @@ document.querySelectorAll('.chat-item').forEach(item => {
         document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
         
-        const nomeGrupo = this.querySelector('.chat-info h4').textContent;
-        const srcAvatar = this.querySelector('.chat-avatar').src;
+        const h4Texto = this.querySelector('.chat-info h4').textContent;
         
+        if (h4Texto.includes("Xadrezin")) grupoAtivo = "Xadrezin";
+        else if (h4Texto.includes("Basquete")) grupoAtivo = "Basquete";
+        else if (h4Texto.includes("Vôlei")) grupoAtivo = "Vôlei";
+        else if (h4Texto.includes("Ping pong")) grupoAtivo = "Ping pong";
+        
+        const srcAvatar = this.querySelector('.chat-avatar').src;
         const headerNome = document.getElementById('header-nome');
         const headerAvatar = document.getElementById('header-avatar');
         
-        if (headerNome) headerNome.textContent = nomeGrupo;
+        if (headerNome) headerNome.textContent = h4Texto;
         if (headerAvatar) headerAvatar.src = srcAvatar;
         if (inputChat) inputChat.value = "";
+        
+        renderizarMensagens(grupoAtivo);
     });
 });
