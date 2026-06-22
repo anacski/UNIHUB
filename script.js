@@ -84,6 +84,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const txtBio = document.querySelector('.profile-body .bio');
     if (txtBio) txtBio.textContent = bioSalva;
 
+    const cardPerfilAtalho = document.getElementById('card-perfil-atalho');
+    if (cardPerfilAtalho) {
+        cardPerfilAtalho.addEventListener('click', () => window.location.href = "perfil.html");
+    }
+
     const inputNovoPost = document.getElementById('input-novo-post');
     const feedContainer = document.getElementById('feed-container');
 
@@ -161,9 +166,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     const item = document.createElement('div');
                     item.className = 'comment-item';
                     item.style.padding = "8px 12px";
-                    item.style.marginTop = "8px";
                     item.style.backgroundColor = "#f0f2f5";
                     item.style.borderRadius = "15px";
+                    item.style.margin = "5px 10px";
                     item.style.fontSize = "0.9rem";
                     item.innerHTML = `<strong>${nomeSalvo}:</strong> ${texto}`;
                     listaComentarios.appendChild(item);
@@ -215,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    /* === INJEÇÃO DO EVENTO CRIADO NO FORMULÁRIO COM O BOTÃO DE PRESENÇA === */
+    /* === INJEÇÃO DO EVENTO IDÊNTICO AO DA MARIA ALICE === */
     const eventoPendente = localStorage.getItem('unihub_novo_evento');
     if (eventoPendente && feedContainer) {
         const dados = JSON.parse(eventoPendente);
@@ -223,52 +228,48 @@ document.addEventListener("DOMContentLoaded", function() {
         cardEvento.className = 'post-card';
         cardEvento.innerHTML = `
             <div class="post-header">
-                <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
+                <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Jorge Filho">
                 <div class="post-info">
                     <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
-                    <span>Criou um evento • Agora mesmo</span>
+                    <span>Postou um novo evento • Agora mesmo</span>
                 </div>
             </div>
-            <div class="post-content">
-                <h3 style="margin-top: 5px; margin-bottom: 8px;">${dados.titulo}</h3>
-                <p>${dados.descricao}</p>
-                <div class="event-box" style="background-color: #f0f2f5; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                    <p style="margin: 0 0 8px 0; color: #050505;"><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #65676b;"></i><strong>${dados.local}</strong></p>
-                    <p style="margin: 0; color: #050505;"><i class="fa-regular fa-calendar-days" style="margin-right: 8px; color: #65676b;"></i><strong>${dados.data}</strong></p>
-                    <button class="btn-confirmar-presenca-dinamico" style="margin-top: 15px; width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: background-color 0.2s;"><i class="fa-regular fa-calendar-check" style="margin-right: 5px;"></i> Confirmar Presença</button>
-                </div>
+            <div class="event-card">
+                <h5>${dados.titulo}</h5>
+                ${dados.descricao ? `<p>${dados.descricao}</p>` : ''}
+                <p><strong>Data/Hora</strong> ${dados.data}</p>
+                <p>📍 ${dados.local}.</p>
+                <button class="btn-confirm">Confirmar presença</button>
             </div>
-            <div class="post-comments"></div>
-            <div class="post-footer" style="border-top: 1px solid #ced0d4; padding-top: 10px; margin-top: 15px; display: flex; justify-content: space-between;">
-                <button class="action-btn btn-curtir" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-heart"></i> Curtir</button>
-                <button class="action-btn btn-comentar" onclick="this.parentElement.nextElementSibling.querySelector('input').focus()" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-comment"></i> Comentar</button>
-                <button class="action-btn btn-republicar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-solid fa-retweet"></i> Republicar</button>
-                <button class="action-btn btn-salvar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-bookmark"></i> Salvar</button>
-            </div>
-            <div class="comment-input-area" style="display: flex; gap: 10px; margin-top: 10px; padding-top: 10px;">
-                <img src="images/avatar-jorge.png" class="avatar-small" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
-                <input type="text" class="input-comentario" placeholder="Escreva um comentário..." style="flex: 1; border-radius: 20px; border: 1px solid #ced0d4; padding: 8px 15px; background: #f0f2f5; outline: none;">
+            <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
+            <div class="post-footer">
+                <button class="interactive-icon btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #666; font-size: 1.2rem;"><i class="fa-solid fa-retweet"></i></button>
+                <button class="interactive-icon btn-curtir" title="Curtir"><i class="fa-regular fa-heart"></i></button>
+                <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter">
+                <button class="interactive-icon btn-salvar" title="Salvar"><i class="fa-regular fa-bookmark"></i></button>
             </div>
         `;
-        feedContainer.insertBefore(cardEvento, feedContainer.firstChild);
+        
+        // Insere no topo do feed-container (logo após a div de sem resultados)
+        feedContainer.insertBefore(cardEvento, feedContainer.children[1]);
         localStorage.removeItem('unihub_novo_evento');
         
         adicionarInteratividadeAoPost(cardEvento);
         aplicarCliquesDePerfil(cardEvento);
 
-        // Adiciona o comportamento de clique no novo botão de confirmar presença
-        const btnNovoConfirmar = cardEvento.querySelector('.btn-confirmar-presenca-dinamico');
+        // Ativa a funcionalidade do botão de presença dinâmico
+        const btnNovoConfirmar = cardEvento.querySelector('.btn-confirm');
         if (btnNovoConfirmar) {
             btnNovoConfirmar.addEventListener('click', function() {
-                this.innerHTML = "✓ Presença Confirmada!";
-                this.style.backgroundColor = "#218838"; 
+                this.textContent = "✓ Presença Confirmada!";
+                this.style.backgroundColor = "#28a745";
                 this.style.color = "#fff";
                 this.style.border = "none";
             });
         }
     }
 
-    /* === INJEÇÃO DO POST RÁPIDO COM ESTILO PADRONIZADO === */
+    /* === INJEÇÃO DO POST RÁPIDO IDÊNTICO AO DO JORGE FILHO === */
     if (inputNovoPost && feedContainer) {
         inputNovoPost.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -280,28 +281,25 @@ document.addEventListener("DOMContentLoaded", function() {
                     novoPost.className = 'post-card';
                     novoPost.innerHTML = `
                         <div class="post-header">
-                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
+                            <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Jorge Filho">
                             <div class="post-info">
                                 <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
-                                <span>Publicou algo • Agora mesmo</span>
+                                <span>Postou uma nova atividade • Agora mesmo</span>
                             </div>
                         </div>
-                        <div class="post-content" style="margin-top: 10px;">
-                            <p>${conteudoDoPost}</p>
+                        <div class="post-content">
+                            ${conteudoDoPost}
                         </div>
-                        <div class="post-comments"></div>
-                        <div class="post-footer" style="border-top: 1px solid #ced0d4; padding-top: 10px; margin-top: 15px; display: flex; justify-content: space-between;">
-                            <button class="action-btn btn-curtir" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-heart"></i> Curtir</button>
-                            <button class="action-btn btn-comentar" onclick="this.parentElement.nextElementSibling.querySelector('input').focus()" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-comment"></i> Comentar</button>
-                            <button class="action-btn btn-republicar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-solid fa-retweet"></i> Republicar</button>
-                            <button class="action-btn btn-salvar" style="background: none; border: none; cursor: pointer; color: #65676b; font-weight: 600; flex: 1; padding: 8px; border-radius: 6px;"><i class="fa-regular fa-bookmark"></i> Salvar</button>
-                        </div>
-                        <div class="comment-input-area" style="display: flex; gap: 10px; margin-top: 10px; padding-top: 10px;">
-                            <img src="images/avatar-jorge.png" class="avatar-small" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
-                            <input type="text" class="input-comentario" placeholder="Escreva um comentário..." style="flex: 1; border-radius: 20px; border: 1px solid #ced0d4; padding: 8px 15px; background: #f0f2f5; outline: none;">
+                        <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
+                        <div class="post-footer">
+                            <button class="interactive-icon btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #666; font-size: 1.2rem;"><i class="fa-solid fa-retweet"></i></button>
+                            <button class="interactive-icon btn-curtir" title="Curtir"><i class="fa-regular fa-heart"></i></button>
+                            <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter">
+                            <button class="interactive-icon btn-salvar" title="Salvar"><i class="fa-regular fa-bookmark"></i></button>
                         </div>
                     `;
-                    feedContainer.insertBefore(novoPost, feedContainer.firstChild);
+                    
+                    feedContainer.insertBefore(novoPost, feedContainer.children[1]);
                     inputNovoPost.value = "";
                     
                     adicionarInteratividadeAoPost(novoPost);
@@ -311,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Aplica interatividade para os posts que já vieram fixos no HTML
     document.querySelectorAll('.post-card').forEach(post => {
         adicionarInteratividadeAoPost(post);
         aplicarCliquesDePerfil(post);
@@ -377,7 +376,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    const inputBusca = document.querySelector('.search-bar');
+    const inputBusca = document.getElementById('search-bar');
     const msgSemResultados = document.getElementById('sem-resultados');
 
     if (inputBusca) {
@@ -413,10 +412,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Mantive isso para eventos originais que já vieram no HTML
-    const btnConfirmar = document.getElementById('btn-confirmar-presenca');
-    if (btnConfirmar) {
-        btnConfirmar.addEventListener('click', function() {
+    const btnConfirmarOriginal = document.getElementById('btn-confirmar-presenca');
+    if (btnConfirmarOriginal) {
+        btnConfirmarOriginal.addEventListener('click', function() {
             this.textContent = "✓ Presença Confirmada!";
             this.style.backgroundColor = "#28a745";
             this.style.color = "#fff";
@@ -425,6 +423,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+/* === CHAT LOGIC === */
 const btnClip = document.getElementById('btn-clip-attach');
 const hiddenFileChat = document.getElementById('chat-hidden-file');
 const inputChat = document.getElementById('chat-input-field');
