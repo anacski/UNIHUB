@@ -87,6 +87,71 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputNovoPost = document.getElementById('input-novo-post');
     const feedContainer = document.getElementById('feed-container');
 
+    const formEvento = document.getElementById('event-form');
+    if (formEvento) {
+        formEvento.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nomeEvento = document.getElementById('event-name').value.trim();
+            const localEvento = document.getElementById('event-location').value.trim();
+            const dataEventoRaw = document.getElementById('event-date').value;
+            const descEvento = document.getElementById('event-desc').value.trim();
+
+            let dataFormatada = "";
+            if (dataEventoRaw) {
+                const dataObj = new Date(dataEventoRaw);
+                const dia = String(dataObj.getDate()).padStart(2, '0');
+                const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+                const ano = dataObj.getFullYear();
+                const horas = String(dataObj.getHours()).padStart(2, '0');
+                const minutos = String(dataObj.getMinutes()).padStart(2, '0');
+                dataFormatada = `${dia}/${mes}/${ano} às ${horas}:${minutos}h`;
+            }
+
+            const novoEventoObj = {
+                titulo: nomeEvento,
+                local: localEvento,
+                data: dataFormatada,
+                descricao: descEvento
+            };
+
+            localStorage.setItem('unihub_novo_evento', JSON.stringify(novoEventoObj));
+            window.location.href = "timeline.html";
+        });
+    }
+
+    const eventoPendente = localStorage.getItem('unihub_novo_evento');
+    if (eventoPendente && feedContainer) {
+        const dados = JSON.parse(eventoPendente);
+        const cardEvento = document.createElement('div');
+        cardEvento.className = 'post-card';
+        cardEvento.innerHTML = `
+            <div class="post-header">
+                <img src="images/avatar-jorge.png" class="avatar-small avatar-clicavel" alt="Avatar">
+                <div class="post-info">
+                    <h4 class="nome-perfil-clicavel">${nomeSalvo}</h4>
+                    <span>Organizou uma nova atividade • Agora mesmo</span>
+                </div>
+            </div>
+            <div class="post-content" style="padding: 10px 0;">
+                <h3 style="margin: 0 0 8px 0; color: #333;">${dados.titulo}</h3>
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #555;">${dados.descricao}</p>
+                <div style="font-size: 0.85rem; color: #666; display: flex; flex-direction: column; gap: 4px; background: #f5f5f5; padding: 10px; border-radius: 6px;">
+                    <span><i class="fa-solid fa-location-dot" style="width: 16px; color: #777;"></i> <strong>Local:</strong> ${dados.local}</span>
+                    <span><i class="fa-regular fa-calendar-days" style="width: 16px; color: #777;"></i> <strong>Data e Hora:</strong> ${dados.data}</span>
+                </div>
+            </div>
+            <div class="post-comments" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 10px;"></div>
+            <div class="post-footer" style="display:flex; align-items:center; gap:10px;">
+                <button class="interactive-icon btn-republicar" title="Republicar" style="background:none; border:none; cursor:pointer; color: #666; font-size: 1.2rem;"><i class="fa-solid fa-retweet"></i></button>
+                <button class="interactive-icon btn-curtir" title="Curtir" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-heart"></i></button>
+                <input type="text" class="input-comentario" placeholder="Faça um comentário e aperte Enter" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:4px;">
+                <button class="interactive-icon btn-salvar" title="Salvar" style="background:none; border:none; cursor:pointer;"><i class="fa-regular fa-bookmark"></i></button>
+            </div>
+        `;
+        feedContainer.insertBefore(cardEvento, feedContainer.firstChild);
+        localStorage.removeItem('unihub_novo_evento');
+    }
+
     if (inputNovoPost && feedContainer) {
         inputNovoPost.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
